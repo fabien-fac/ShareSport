@@ -39,3 +39,5 @@
 /.link_to_grails_plugins/
 /target-eclipse/
 .idea
+ShareSport-grailsPlugins.iml
+ShareSport.iml
