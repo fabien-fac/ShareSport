@@ -1,0 +1,13 @@
+html {background-color: #ffffff; background-image: inherit;}
+
+body {width: 100%; max-width: inherit; box-shadow: none;}
+
+div#grailsLogo {width: 100%; min-height: 120px; background-color: #555555;}
+
+div#page-body {width: 80%; margin: 40px auto;}
+
+div.body-content{float:left; width:66%; padding: 2%;}
+
+div.body-sidebar{margin-left: 70%; padding: 2%}
+
+div#footer {}
