@@ -1,4 +1,10 @@
 language: groovy
 jdk:
   - oraclejdk7
+  - openjdk7
+  - openjdk6
+deploy:
+  provider: heroku
+  on:
+      all_branches: true
 script: "./grailsw refresh-dependencies && ./grailsw test-app unit:"
