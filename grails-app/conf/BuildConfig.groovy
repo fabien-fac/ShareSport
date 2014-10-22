@@ -82,6 +82,5 @@ grails.project.dependency.resolution = {
         //compile ":handlebars-asset-pipeline:1.3.0.1"
 
         test ":code-coverage:2.0.3-2"
-        test ":spock:0.7"
     }
 }
