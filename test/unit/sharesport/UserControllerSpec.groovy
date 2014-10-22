@@ -148,4 +148,47 @@ class UserControllerSpec extends Specification {
             response.redirectedUrl == '/user/index'
             flash.message != null
     }
+
+    void "Test de l'inscription d'un utilisateur valide"() {
+
+        when:"Appel de l'inescription avec des parametres d'inscription valides"
+        controller.params.email = "toto@toto.fr"
+        controller.params.login = "toto"
+        controller.params.password = "totototo"
+        controller.inscription()
+
+        then:"Réponse positive"
+        response.json.toString() == "{\"emailError\":\"\",\"succeed\":\"true\",\"loginError\":\"\"}"
+    }
+
+    void "Test de l'inscription d'un utilisateur non valide"() {
+
+        when:"Appel de l'inescription avec des parametres d'inscription non valides"
+        controller.params.email = "toto"
+        controller.params.login = "toto"
+        controller.params.password = "totototo"
+        controller.inscription()
+
+        then:"Réponse negative"
+        response.json.toString() == "{\"emailError\":\"\",\"succeed\":\"false\",\"loginError\":\"\"}"
+    }
+
+    void "Test de l'inscription d'un utilisateur avec login et email deja utilisé"() {
+
+        User user = new User()
+        user.email = "toto@toto.fr"
+        user.login = "toto"
+        user.password = "totototo"
+        user.save(flush: true)
+
+        when:"Appel de l'inescription avec des parametres d'inscription déjà utilisés"
+        controller.params.email = "toto@toto.fr"
+        controller.params.login = "toto"
+        controller.params.password = "totototo"
+        controller.inscription()
+
+        then:"Réponse negative"
+        response.json.toString() == "{\"emailError\":\"Email déjà utilisé\",\"succeed\":\"false\",\"loginError\":\"Login déjà utilisé\"}"
+    }
+
 }
