@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>Sharesport - Paris sportifs</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -84,24 +84,37 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main">
             <div class="body-content">
-                <h1 class="content">Welcome to Grails</h1>
+                <h1>Welcome to ShareSport</h1>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque consectetur quam, eleifend ultricies magna iaculis id. Nullam tristique a mi ut aliquet. Donec tempus vel dolor ut pharetra. Pellentesque mollis neque pretium ligula pulvinar, ut auctor purus iaculis. Vivamus ipsum nulla, suscipit quis fermentum non, congue et mi. Ut auctor dapibus erat, sit amet pulvinar ante condimentum vel. Suspendisse molestie lectus ut arcu sodales sollicitudin. Ut mollis, nisi id vehicula vestibulum, ipsum eros eleifend ipsum, et venenatis nunc velit sit amet sapien. Proin auctor aliquet volutpat.
                 </p>
-                <h2 class="content">Titre 2</h2>
+                <h2>Titre 2</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque consectetur quam, eleifend ultricies magna iaculis id. Nullam tristique a mi ut aliquet. Donec tempus vel dolor ut pharetra. Pellentesque mollis neque pretium ligula pulvinar, ut auctor purus iaculis. Vivamus ipsum nulla, suscipit quis fermentum non, congue et mi. Ut auctor dapibus erat, sit amet pulvinar ante condimentum vel. Suspendisse molestie lectus ut arcu sodales sollicitudin. Ut mollis, nisi id vehicula vestibulum, ipsum eros eleifend ipsum, et venenatis nunc velit sit amet sapien. Proin auctor aliquet volutpat.
                 </p>
             </div>
             <div class="body-sidebar">
-                <h1 >Welcome to Grails</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque consectetur quam, eleifend ultricies magna iaculis id. Nullam tristique a mi ut aliquet. Donec tempus vel dolor ut pharetra. Pellentesque mollis neque pretium ligula pulvinar, ut auctor purus iaculis. Vivamus ipsum nulla, suscipit quis fermentum non, congue et mi. Ut auctor dapibus erat, sit amet pulvinar ante condimentum vel. Suspendisse molestie lectus ut arcu sodales sollicitudin. Ut mollis, nisi id vehicula vestibulum, ipsum eros eleifend ipsum, et venenatis nunc velit sit amet sapien. Proin auctor aliquet volutpat.
-                </p>
-                <h2 class="sidebar">Titre 2</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque consectetur quam, eleifend ultricies magna iaculis id. Nullam tristique a mi ut aliquet. Donec tempus vel dolor ut pharetra. Pellentesque mollis neque pretium ligula pulvinar, ut auctor purus iaculis. Vivamus ipsum nulla, suscipit quis fermentum non, congue et mi. Ut auctor dapibus erat, sit amet pulvinar ante condimentum vel. Suspendisse molestie lectus ut arcu sodales sollicitudin. Ut mollis, nisi id vehicula vestibulum, ipsum eros eleifend ipsum, et venenatis nunc velit sit amet sapien. Proin auctor aliquet volutpat.
-                    </p>
+                <h1>Formulaire d'inscription</h1>
+                <g:form>
+                    <table>
+                        <tr>
+                            <td><g:textField name="email" id="email-signin" placeholder="Adresse email"/></td>
+                            <td><span class="error-form" id="msg-email-signin"></span></td>
+                        </tr>
+                        <tr>
+                            <td><g:textField name="login" id="login-signin" placeholder="Nom d'utilisateur"/></td>
+                            <td><span class="error-form" id="msg-login-signin"></span></td>
+                        </tr>
+                        <tr>
+                            <td><g:passwordField name="password" id="password-signin" placeholder="Mot de passe"/></td>
+                            <td><span class="error-form" id="msg-password-signin"></span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="button" class="button-form" id="button-signin" value="Inscription"/></td>
+                        </tr>
+                    </table>
+
+                </g:form>
             </div>
 		</div>
 	</body>

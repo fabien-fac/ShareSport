@@ -21,11 +21,11 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'login', 'error')} required">
-	<label for="pseudo">
-		<g:message code="user.pseudo.label" default="Pseudo" />
+	<label for="login">
+		<g:message code="user.login.label" default="Login" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="pseudo" maxlength="20" required="" value="${userInstance?.pseudo}"/>
+	<g:textField name="login" maxlength="20" required="" value="${userInstance?.login}"/>
 
 </div>
 

@@ -92,6 +92,44 @@ class UserController {
         }
     }
 
+    @Transactional
+    def inscription (){
+
+        String result = ""
+        String emailError = ""
+        String loginError = ""
+
+        User user = new User()
+        user.login = params.login
+        user.email = params.email
+        user.password = params.password
+
+        if(!user.validate()){
+            if(User.findByLogin(params.login)){
+                loginError = "Login déjà utilisé"
+            }
+            if(User.findByEmail(params.email)){
+                emailError = "Email déjà utilisé"
+            }
+
+            result = "false"
+        }
+        else{
+            user.save()
+            result = "true"
+        }
+
+        render(contentType: 'text/json', encoding: "UTF-8") {[
+                'succeed': result,
+                'emailError': emailError,
+                'loginError': loginError
+        ]}
+    }
+
+    def signin(){
+
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {
