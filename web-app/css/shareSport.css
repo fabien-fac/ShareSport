@@ -2,9 +2,16 @@ html {background-color: #ffffff; background-image: inherit;}
 
 body {width: 100%; max-width: inherit; box-shadow: none;}
 
-div#grailsLogo {width: 100%; height: 140px; background-color: #555555; vertical-align: middle}
+div#grailsLogo {width: 100%; height: 140px; background-color: #555555;}
+div#grailsLogo li {}
+div#grailsLogo li:hover {}
+div#grailsLogo li.btn-logo{float: left; width: 10%; display: table-cell; text-align: center;}
+div#grailsLogo li.btn-header{float: left; width: 10%;   display: table-cell; color: #00c0f7; text-align: center;}
+div#grailsLogo li.btn-header:hover{background-color: #00c0f7; color: #555555; font-weight:bold; box-shadow: 0 0 0.5em #00c0f7; cursor: pointer; transition: 0.2s;}
+div#grailsLogo li.btn-header a{color: inherit; margin: inherit;line-height: 140px; text-decoration: none; font-size: 140%;}
 
-div#menu-banner {float: left;}
+
+
 
 div.connect {float: right; height: 140px;}
 table.connect {border: inherit;}
