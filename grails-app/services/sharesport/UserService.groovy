@@ -43,12 +43,16 @@ class UserService {
         String paramsEmail = params.email
 
         User user = User.findByEmail(paramsEmail)
-        if(user != null){
-            if(user.password == params.password && user.isActive == true){
+        if (user != null) {
+            if (user.password == params.password && user.isActive == true) {
                 loginSuccess = true
             }
         }
 
         loginSuccess
+    }
+
+    def update(User user){
+        user.save()
     }
 }
