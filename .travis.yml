@@ -6,9 +6,10 @@ jdk:
 deploy:
   provider: heroku
   api_key: "0f423650-398c-49ed-937d-9d2a5ce1bf63"
-  api: ShareSport
-  on:
+  app: ShareSport
       develop: ShareSport-develop
+      sprint1: ShareSport-sprint1
+  on:
       repo: fabien-fac/ShareSport
   strategy: git
 script: "./grailsw refresh-dependencies && ./grailsw test-app unit:"
