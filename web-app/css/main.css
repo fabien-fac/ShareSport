@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6 {
 /* BASE LAYOUT */
 
 html {
-	background-color: #ddd;
+	background-color: #ffffff;
 	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
 	background-image: linear-gradient(top, #aaa, #ddd);
@@ -249,7 +249,6 @@ input, select, textarea {
 	background-color: #fcfcfc;
 	border: 1px solid #cccccc;
 	font-size: 1em;
-	padding: 0.2em 0.4em;
 }
 
 select {
