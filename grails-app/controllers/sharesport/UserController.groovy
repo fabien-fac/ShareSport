@@ -66,7 +66,7 @@ class UserController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.login])
                 redirect userInstance
             }
             '*'{ respond userInstance, [status: OK] }
