@@ -61,12 +61,13 @@ class UserController {
             respond userInstance.errors, view:'edit'
             return
         }
-
-        userInstance.save flush:true
+        UserService user = new UserService()
+        user.update(userInstance)
+        flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.login])
+                flash.message = "Utilisateur \""+userInstance.login+"\" est modifié"
                 redirect userInstance
             }
             '*'{ respond userInstance, [status: OK] }

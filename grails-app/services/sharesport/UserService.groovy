@@ -36,4 +36,8 @@ class UserService {
 
         ['succeed': result, 'emailError': emailError, 'loginError': loginError]
     }
+
+    def update(User user){
+        user.save()
+    }
 }
