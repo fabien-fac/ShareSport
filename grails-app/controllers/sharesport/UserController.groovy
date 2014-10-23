@@ -52,7 +52,6 @@ class UserController {
         respond userInstance
     }
 
-    @Transactional
     def update(User userInstance) {
         if (userInstance == null) {
             notFound()
@@ -63,8 +62,8 @@ class UserController {
             respond userInstance.errors, view:'edit'
             return
         }
-        UserService user = new UserService()
-        user.update(userInstance)
+
+        userService.updateUser(userInstance)
         flush:true
 
         request.withFormat {
@@ -97,10 +96,6 @@ class UserController {
 
     def inscription (){
         render(contentType: 'text/json', encoding: "UTF-8") {userService.inscriptionUser(params)}
-    }
-
-    def signin(){
-
     }
 
     def login() {

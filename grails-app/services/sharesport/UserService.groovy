@@ -52,7 +52,7 @@ class UserService {
         loginSuccess
     }
 
-    def update(User user){
+    def updateUser(User user){
         user.save()
     }
 }
