@@ -23,7 +23,20 @@
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner">
-            <a href="/ShareSport"><img src="${resource(dir: 'images', file: 'sharesport_logo.png')}" alt="ShareSport" height="100px"/></a>
+            <a href="/ShareSport/"><img src="${resource(dir: 'images', file: 'sharesport_logo.png')}" alt="ShareSport" height="100px"/></a>
+            <div id="menu-banner">
+                <ul>
+                    <li>
+                        <a href="">Item 1</a>
+                    </li>
+                    <li>
+                        <a href="">Item 1</a>
+                    </li>
+                    <li>
+                        <a href="">Item 1</a>
+                    </li>
+                </ul>
+            </div>
             <div class="connect">
                 <g:if test="${session.userId == null}">
                     <g:form>
