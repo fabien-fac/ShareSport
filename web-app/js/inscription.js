@@ -34,7 +34,7 @@ $( document ).ready(function() {
 
             var xmlRequest = $.ajax({
                 type: "POST",
-                url: "/ShareSport/user/inscription",
+                url: "/sharesport/user/inscription",
                 data: {"email": $( "#email-signin").val(), "login": $( "#login-signin").val(), "password": $( "#password-signin").val()}
             });
 
