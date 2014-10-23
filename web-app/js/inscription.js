@@ -34,12 +34,16 @@ $( document ).ready(function() {
 
             var xmlRequest = $.ajax({
                 type: "POST",
-                url: "/sharesport/user/inscription",
+                url: "/ShareSport/user/inscription",
                 data: {"email": $( "#email-signin").val(), "login": $( "#login-signin").val(), "password": $( "#password-signin").val()}
             });
 
             xmlRequest.done( function(response){
                 processingInscriptionResponse(response);
+            });
+
+            xmlRequest.fail( function() {
+                alert("Une erreur serveur est survenue");
             });
         }
 
