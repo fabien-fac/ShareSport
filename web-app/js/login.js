@@ -47,10 +47,13 @@ $( document ).ready(function() {
 var processingLoginResponse = function (response) {
     console.log(response);
     if(response.succeed == "true"){
+
+        var baseUrl = getApplicationUrl();
+
         $( "#password-connect" ).removeClass("error");
         $( "#email-connect" ).removeClass("error");
         console.log("succeed");
-        window.location.replace(window.location.href + response.url);
+        window.location.replace(baseUrl + response.url);
     }
     else{
         $( "#password-connect" ).addClass("error");
