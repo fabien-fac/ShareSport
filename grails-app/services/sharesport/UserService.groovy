@@ -38,6 +38,7 @@ class UserService {
     }
 
     def update(User user){
+        user.password = user.password.encodeAsMD5()
         user.save()
     }
 }

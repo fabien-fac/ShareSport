@@ -191,4 +191,35 @@ class UserControllerSpec extends Specification {
         response.json.toString() == "{\"emailError\":\"Email déjà utilisé\",\"succeed\":\"false\",\"loginError\":\"Login déjà utilisé\"}"
     }
 
+    void "Test de mise a jour des champs d'un utilisateur"(){
+        given: "un utilisateur"
+        User user = new User(
+                email: "toto@toto.fr",
+                login: "toto",
+                password: ("totototo").encodeAsMD5(),
+                score: 4
+        )
+        user.save(flush: true)
+        int idUser = user.getId()
+
+        when: "informations d'un utilisateur est modifie"
+        user.email = emailTest
+        user.login = loginTest
+        user.password = passwordTest
+        user.score = scoreTest
+        controller.update(user)
+        User userModel  = User.get(idUser)
+
+        then: "tous les chmaps dans model doivent être modifiés"
+        userModel.login == loginTest
+        userModel.email == emailTest
+        userModel.score == scoreTest
+        userModel.password == passwordTest.encodeAsMD5()
+
+        where:
+        emailTest   |   loginTest   |   passwordTest    |   scoreTest
+        "abc@abc.fr"|   "abcde"     |   "12345678"      |   4
+    }
+
+
 }
