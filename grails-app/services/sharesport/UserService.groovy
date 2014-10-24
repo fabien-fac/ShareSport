@@ -1,12 +1,12 @@
 package sharesport
 
-import sharesport.User
+import grails.transaction.Transactional
 
 /**
  * Created by fabien on 23/10/14.
  */
 
-
+@Transactional
 class UserService {
 
     def inscriptionUser(Map params) {
@@ -37,7 +37,22 @@ class UserService {
         ['succeed': result, 'emailError': emailError, 'loginError': loginError]
     }
 
-    def update(User user){
+    def login(Map params) {
+
+        boolean loginSuccess = false
+        String paramsEmail = params.email
+
+        User user = User.findByEmail(paramsEmail)
+        if (user != null) {
+            if (user.password == params.password && user.isActive == true) {
+                loginSuccess = true
+            }
+        }
+
+        loginSuccess
+    }
+
+    def updateUser(User user){
         user.save()
     }
 }

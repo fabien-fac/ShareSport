@@ -113,7 +113,6 @@
                             <td><input type="button" class="button-form" id="button-signin" value="Inscription"/></td>
                         </tr>
                     </table>
-
                 </g:form>
             </div>
 		</div>
