@@ -1,7 +1,0 @@
-html {background-color: #ffffff; background-image: inherit}
-
-body {width: 100%; max-width: inherit; box-shadow: 0}
-
-div#grailsLogo {width: 100%; background-color: #006dba}
-
-div#footer{}
