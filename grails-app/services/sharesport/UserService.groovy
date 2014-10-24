@@ -1,6 +1,9 @@
 package sharesport
 
 import grails.transaction.Transactional
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsHttpSession
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
+import org.springframework.web.context.request.RequestContextHolder
 
 /**
  * Created by fabien on 23/10/14.
@@ -41,10 +44,13 @@ class UserService {
 
         boolean loginSuccess = false
         String paramsEmail = params.email
+        GrailsWebRequest request = RequestContextHolder.currentRequestAttributes()
+        GrailsHttpSession session = request.session
 
         User user = User.findByEmail(paramsEmail)
         if (user != null) {
             if (user.password == params.password && user.isActive == true) {
+                session["userId"] = user.id;
                 loginSuccess = true
             }
         }

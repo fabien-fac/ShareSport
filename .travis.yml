@@ -1,13 +1,14 @@
 language: groovy
 jdk:
-- oraclejdk7
-- openjdk7
-- openjdk6
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
 deploy:
   provider: heroku
-  api_key:
-    secure: fHZVyCR5n6vyxZnooWCfN6r+6AkBlj893dYZXMjH2O3dAwye5qHiJ0ceu//dwIXfr+AZaVAmfOfhnjNxLq+gy8PGbfvMzTRl4Yc3ctWF463Eotznt1TT8e6MQ8yX8ccfshh6NmeyrqHMiLk/CjvpujzeyfJaZm8aN+z69wzQeDI=
+  api_key: "0f423650-398c-49ed-937d-9d2a5ce1bf63"
   app: sharesport
   on:
-    repo: fabien-fac/ShareSport
-    branch: sprint1
+      repo: fabien-fac/ShareSport
+      branch: sprint1
+  strategy: git
+script: "./grailsw refresh-dependencies && ./grailsw test-app unit:"
