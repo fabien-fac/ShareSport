@@ -15,9 +15,7 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'shareSport.css')}" type="text/css">
-        <g:javascript src="jquery-2.1.1.min.js"/>
-        <g:javascript src="inscription.js"/>
-        <g:javascript src="login.js"/>
+
 		<g:layoutHead/>
 		<g:javascript library="application"/>
 		<r:layoutResources />

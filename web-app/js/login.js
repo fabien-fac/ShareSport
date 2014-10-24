@@ -26,9 +26,11 @@ $( document ).ready(function() {
 
         if( valid ) {
 
+            var baseUrl = getApplicationUrl();
+
             var xmlRequest = $.ajax({
                 type: "POST",
-                url: "/ShareSport/user/login",
+                url: baseUrl+"user/login",
                 data: {"email": $( "#email-connect").val(), "password": $( "#password-connect").val()}
             });
 

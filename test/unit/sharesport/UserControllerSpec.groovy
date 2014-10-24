@@ -247,6 +247,10 @@ class UserControllerSpec extends Specification {
         false     | "toto@toto.fr" | "totototo"
         false     | "tata@toto.fr" | "titititi"
         false     | "tata@toto.fr" | "totototo"
+        null      | "tata@toto.fr" | "tititi"
+        null      | "tata@toto.fr" | "totototo"
+        null      | "toto@toto.fr" | "titititi"
+        null      | "toto@toto.fr" | "totototo"
     }
 
     void "Test du login d'un utilisateur inactif"() {
