@@ -8,6 +8,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
+    UserService userService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -50,7 +52,6 @@ class UserController {
         respond userInstance
     }
 
-    @Transactional
     def update(User userInstance) {
         if (userInstance == null) {
             notFound()
@@ -61,8 +62,8 @@ class UserController {
             respond userInstance.errors, view:'edit'
             return
         }
-        UserService user = new UserService()
-        user.update(userInstance)
+
+        userService.updateUser(userInstance)
         flush:true
 
         request.withFormat {
@@ -94,11 +95,26 @@ class UserController {
     }
 
     def inscription (){
-        UserService userService = new UserService()
         render(contentType: 'text/json', encoding: "UTF-8") {userService.inscriptionUser(params)}
     }
 
-    def signin(){
+    def login() {
+        Boolean result = userService.login(params)
+        String urlToRedirect = ""
+        if(result){
+            urlToRedirect = "user/index"
+        }
+
+        render(contentType: 'text/json', encoding: "UTF-8") {['succeed': result.toString(), 'url': urlToRedirect] }
+    }
+
+    def logout() {
+        Boolean result = userService.logout()
+        String urlToRedirect = ""
+        if(result)
+        {
+            redirect(uri:'/')
+        }
 
     }
 

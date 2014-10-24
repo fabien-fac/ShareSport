@@ -117,5 +117,4 @@ class UserSpec extends Specification {
         res == false
         user2.hasErrors()
     }
-
 }

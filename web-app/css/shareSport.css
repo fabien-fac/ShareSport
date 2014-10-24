@@ -10,7 +10,7 @@ div#grailsLogo li.btn-header{float: left; width: 10%;   display: table-cell; col
 div#grailsLogo li.btn-header:hover{background-color: #00c0f7; color: #555555; font-weight:bold; box-shadow: 0 0 0.5em #00c0f7; cursor: pointer; transition: 0.2s;}
 div#grailsLogo li.btn-header a{color: inherit; margin: inherit;line-height: 140px; text-decoration: none; font-size: 140%;}
 
-div.connect {float: right; height: 140px; line-height:200px;}
+div.connect {float: right; height: 140px; line-height:140px;}
 table.connect {border: inherit; vertical-align:middle; display:inline-block; line-height:normal;}
 table.connect tr{background-color: inherit}
 
@@ -33,6 +33,10 @@ div#footer {}
 
 
 /* COMMON */
+
+input{width: 250px; height: 25px; border-radius: 5px; border: inherit; background-color: #eeeeee;}
+input.error{box-shadow: 0 0 0.5em #cc0000;}
+
 h1{color: #00c0f7; text-transform: uppercase; font-size: 150%}
 h2{color: #666666; text-transform: uppercase; font-size: 130%}
 
@@ -43,4 +47,4 @@ input.button-form:hover, input[type=submit]:hover{box-shadow: 0 0 0.5em #00c0f7;
 
 form table tr:hover {background-color: inherit;}
 
-span.error-form{font-size: small; color: #cc0000;}
+span.error-form{font-size: small; color: #cc0000; line-height: 2px;}

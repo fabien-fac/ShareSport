@@ -30,16 +30,20 @@ $( document ).ready(function() {
         }
 
         if(valid){
-            console.log("Check formulaire valid");
+            var baseUrl = getApplicationUrl();
 
             var xmlRequest = $.ajax({
                 type: "POST",
-                url: "/sharesport/user/inscription",
+                url: baseUrl+"user/inscription",
                 data: {"email": $( "#email-signin").val(), "login": $( "#login-signin").val(), "password": $( "#password-signin").val()}
             });
 
             xmlRequest.done( function(response){
                 processingInscriptionResponse(response);
+            });
+
+            xmlRequest.fail( function() {
+                alert("Une erreur serveur est survenue");
             });
         }
 
