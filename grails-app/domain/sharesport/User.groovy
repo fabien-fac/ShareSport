@@ -23,13 +23,4 @@ class User {
         login unique: true
         score min: 0
     }
-
-    /*
-    *   return true if the user is desactived
-     */
-    Boolean suppressUser ()
-    {
-        isActive = false
-        !isActive
-    }
 }
