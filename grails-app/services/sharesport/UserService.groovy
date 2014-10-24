@@ -58,6 +58,21 @@ class UserService {
         loginSuccess
     }
 
+    def logout() {
+
+        boolean logoutSuccess = false
+        GrailsWebRequest request = RequestContextHolder.currentRequestAttributes()
+        GrailsHttpSession session = request.session
+
+        long userId = session["userId"]
+
+        if (userId != null) {
+            session.invalidate()
+            logoutSuccess = true
+        }
+        logoutSuccess
+    }
+
     def updateUser(User user){
         user.password = user.password.encodeAsMD5()
         user.save()

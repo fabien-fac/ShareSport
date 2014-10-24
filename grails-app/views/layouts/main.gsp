@@ -53,7 +53,9 @@
                     </g:form>
                 </g:if>
                 <g:else>
-                    <g:link controller="user" action="disconnect"><span class="button">Deconnexion</span></g:link>
+                    <g:form controller="user" action="logout">
+                        <g:submitButton name="logout" value="Deconnexion"/>
+                    </g:form>
                 </g:else>
             </div>
         </div>

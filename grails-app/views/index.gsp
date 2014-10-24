@@ -99,14 +99,20 @@
                     <table>
                         <tr>
                             <td><g:textField name="email" id="email-signin" placeholder="Adresse email"/></td>
+                        </tr>
+                        <tr>
                             <td><span class="error-form" id="msg-email-signin"></span></td>
                         </tr>
                         <tr>
                             <td><g:textField name="login" id="login-signin" placeholder="Nom d'utilisateur"/></td>
+                        </tr>
+                        <tr>
                             <td><span class="error-form" id="msg-login-signin"></span></td>
                         </tr>
                         <tr>
                             <td><g:passwordField name="password" id="password-signin" placeholder="Mot de passe"/></td>
+                        </tr>
+                        <tr>
                             <td><span class="error-form" id="msg-password-signin"></span></td>
                         </tr>
                         <tr>
