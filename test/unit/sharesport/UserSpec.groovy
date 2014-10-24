@@ -117,18 +117,4 @@ class UserSpec extends Specification {
         res == false
         user2.hasErrors()
     }
-
-    void "test de la méthode suppressUser"()
-    {
-        given: "un utilisateur actif"
-        user.email = "toto@gmail.com"
-        user.login = "toto"
-        user.password = "totopwd"
-
-        when: "l'utilisateur supprime son compte"
-        def res = user.suppressUser()
-
-        then: "le compte est désactivé"
-        res == true
-    }
 }
