@@ -137,9 +137,6 @@ img {
 .nav {
 	background-color: #efefef;
 	padding: 0.5em 0.75em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
 	zoom: 1;
 }
 
@@ -180,8 +177,6 @@ img {
 
 .no-borderradius .nav a:focus, .no-borderradius .nav a:hover {
 	background-color: transparent;
-	color: #444444;
-	text-decoration: underline;
 }
 
 .nav a.home, .nav a.list, .nav a.create {
@@ -514,8 +509,6 @@ th:hover, tr:hover {
 .no-borderradius .pagination a:hover, .no-borderradius .pagination a:focus,
 .no-borderradius .pagination .currentStep {
 	background-color: transparent;
-	color: #444444;
-	text-decoration: underline;
 }
 
 /* ACTION BUTTONS */
@@ -562,8 +555,6 @@ th:hover, tr:hover {
 .no-borderradius .buttons input:hover, .no-borderradius .buttons input:focus,
 .no-borderradius .buttons a:hover, .no-borderradius .buttons a:focus {
 	background-color: transparent;
-	color: #444444;
-	text-decoration: underline;
 }
 
 .buttons .delete, .buttons .edit, .buttons .save {
