@@ -6,7 +6,7 @@ jdk:
 deploy:
   provider: heroku
   api_key: "0f423650-398c-49ed-937d-9d2a5ce1bf63"
-  app: testsharesport
+  app: sharesport
   on:
       repo: fabien-fac/ShareSport
       branch: sprint1
