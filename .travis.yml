@@ -10,6 +10,6 @@ deploy:
   app: sharesport
   on:
       repo: fabien-fac/ShareSport
-      branch: sprint1
+      branch: sprint2
   strategy: git
 script: "./grailsw refresh-dependencies && ./grailsw test-app unit:"
