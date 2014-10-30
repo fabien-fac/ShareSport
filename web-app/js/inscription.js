@@ -43,7 +43,7 @@ $( document ).ready(function() {
             });
 
             xmlRequest.fail( function() {
-                alert("Une erreur serveur est survenue");
+                $.fancybox("<strong>Une erreur serveur est survenue</strong>");
             });
         }
 
@@ -65,7 +65,7 @@ var isPasswordValid = function (password) {
 
 var processingInscriptionResponse = function (responseInscription) {
     if(responseInscription.succeed == "true"){
-        alert("Inscription réussite");
+        $.fancybox("<strong>Inscription réussie</strong>");
         $( "#email-signin").val("");
         $( "#login-signin").val("");
         $( "#password-signin").val("");

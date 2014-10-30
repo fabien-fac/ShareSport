@@ -20,7 +20,7 @@ class HashtagSpec extends Specification {
     }
 
     @Unroll
-    void "test contrainte hashtag valide : aLabel"() {
+    void "test contrainte hashtag valide : #aLabel"() {
 
         given: "pour un hashtag donné"
         hashtag.label = aLabel
@@ -29,7 +29,7 @@ class HashtagSpec extends Specification {
         def res = hashtag.validate()
 
         then: "la validation doit fonctionner"
-        res == true
+        res
         !hashtag.hasErrors()
 
         where:
@@ -52,7 +52,7 @@ class HashtagSpec extends Specification {
         def res = hashtag.validate()
 
         then: "la validation ne doit pas fonctionner"
-        res == false
+        !res
         hashtag.hasErrors()
 
         where:
