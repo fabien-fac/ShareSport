@@ -1,6 +1,6 @@
 package sharesport
 
-
+import org.springframework.security.access.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -12,20 +12,24 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userInstanceCount: User.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def show(User userInstance) {
         respond userInstance
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         respond new User(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def save(User userInstance) {
         if (userInstance == null) {
             notFound()
@@ -48,10 +52,12 @@ class UserController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(User userInstance) {
         respond userInstance
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update(User userInstance) {
         if (userInstance == null) {
             notFound()
@@ -76,6 +82,7 @@ class UserController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(User userInstance) {
 
         if (userInstance == null) {
