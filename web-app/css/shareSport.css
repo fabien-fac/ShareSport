@@ -1,0 +1,50 @@
+html {background-color: #ffffff; background-image: inherit;}
+
+body {width: 100%; max-width: inherit; box-shadow: none;}
+
+div#grailsLogo {width: 100%; height: 140px; background-color: #555555;}
+div#grailsLogo li {}
+div#grailsLogo li:hover {}
+div#grailsLogo li.btn-logo{float: left; width: 10%; display: table-cell; text-align: center;}
+div#grailsLogo li.btn-header{float: left; width: 10%;   display: table-cell; color: #00c0f7; text-align: center;}
+div#grailsLogo li.btn-header:hover{background-color: #00c0f7; color: #555555; font-weight:bold; box-shadow: 0 0 0.5em #00c0f7; cursor: pointer; transition: 0.2s;}
+div#grailsLogo li.btn-header a{color: inherit; margin: inherit;line-height: 140px; text-decoration: none; font-size: 140%;}
+
+div.connect {float: right; height: 140px; line-height:140px;}
+table.connect {border: inherit; vertical-align:middle; display:inline-block; line-height:normal;}
+table.connect tr{background-color: inherit}
+
+div#page-body {width: 80%; margin: 40px auto;}
+
+div.nav {background-color: #dddddd; margin: 5px; border-radius: 5px;}
+.nav a.home, .nav a.list, .nav a.create{color: #555555;}
+.nav a.home:hover, .nav a.list:hover, .nav a.create:hover{color: #ffffff;}
+
+div.body-content{float:left; width:60%; padding: 2%;}
+.body-content h1{color: #00c0f7; text-transform: uppercase; font-size: 200%}
+.body-content h2{color: #666666; text-transform: uppercase; font-size: 130%}
+
+div.body-sidebar{margin-left: 66%; padding: 2%}
+.body-sidebar h1{color: #00c0f7; text-transform: uppercase; font-size: 150%}
+.body-sidebar h2{color: #666666; text-transform: uppercase; font-size: 100%}
+
+div#footer {}
+
+
+
+/* COMMON */
+
+input{width: 250px; height: 25px; border-radius: 5px; border: inherit; background-color: #eeeeee;}
+input.error{box-shadow: 0 0 0.5em #cc0000;}
+
+h1{color: #00c0f7; text-transform: uppercase; font-size: 150%}
+h2{color: #666666; text-transform: uppercase; font-size: 130%}
+
+input{width: 250px; height: 25px; border-radius: 5px; border: inherit; background-color: #eeeeee; text-indent: 10px;}
+input:focus{box-shadow: 0 0 0.5em #00c0f7; border-radius: 5px;}
+input.button-form, input[type=submit]{width: 120px; padding: 0 10px;}
+input.button-form:hover, input[type=submit]:hover{box-shadow: 0 0 0.5em #00c0f7; background-color: #00c0f7; color: #ffffff; cursor: pointer; transition: 0.2s;}
+
+form table tr:hover {background-color: inherit;}
+
+span.error-form{font-size: small; color: #cc0000; line-height: 2px;}

@@ -8,6 +8,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
+    UserService userService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -50,7 +52,6 @@ class UserController {
         respond userInstance
     }
 
-    @Transactional
     def update(User userInstance) {
         if (userInstance == null) {
             notFound()
@@ -62,11 +63,12 @@ class UserController {
             return
         }
 
-        userInstance.save flush:true
+        userService.updateUser(userInstance)
+        flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
+                flash.message = "Utilisateur \""+userInstance.login+"\" est modifié"
                 redirect userInstance
             }
             '*'{ respond userInstance, [status: OK] }
@@ -90,6 +92,30 @@ class UserController {
             }
             '*'{ render status: NO_CONTENT }
         }
+    }
+
+    def inscription (){
+        render(contentType: 'text/json', encoding: "UTF-8") {userService.inscriptionUser(params)}
+    }
+
+    def login() {
+        Boolean result = userService.login(params)
+        String urlToRedirect = ""
+        if(result){
+            urlToRedirect = "user/index"
+        }
+
+        render(contentType: 'text/json', encoding: "UTF-8") {['succeed': result.toString(), 'url': urlToRedirect] }
+    }
+
+    def logout() {
+        Boolean result = userService.logout()
+        String urlToRedirect = ""
+        if(result)
+        {
+            redirect(uri:'/')
+        }
+
     }
 
     protected void notFound() {

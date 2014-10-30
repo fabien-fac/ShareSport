@@ -3,14 +3,27 @@ package sharesport
 
 import grails.test.mixin.*
 import spock.lang.*
+import org.springframework.transaction.PlatformTransactionManager
+import org.springframework.transaction.TransactionStatus
 
 @TestFor(UserController)
 @Mock(User)
 class UserControllerSpec extends Specification {
 
+    UserService userTestService = new UserService()
+
+    def setup() {
+        userTestService.transactionManager = Mock(PlatformTransactionManager) {
+            getTransaction(_) >> Mock(TransactionStatus)
+        }
+        controller.userService = userTestService
+    }
+
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
+        params["email"] = "email@gmail.com"
+        params["login"] = "login"
+        params["password"] = "password"
         //params["name"] = 'someValidName'
     }
 
@@ -90,6 +103,7 @@ class UserControllerSpec extends Specification {
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
+
         when: "Update is called for a domain instance that doesn't exist"
         request.contentType = FORM_CONTENT_TYPE
         controller.update(null)
@@ -145,4 +159,146 @@ class UserControllerSpec extends Specification {
         response.redirectedUrl == '/user/index'
         flash.message != null
     }
+
+    void "Test de l'inscription d'un utilisateur valide"() {
+
+        when: "Appel de l'inescription avec des parametres d'inscription valides"
+        controller.params.email = "toto@toto.fr"
+        controller.params.login = "toto"
+        controller.params.password = "totototo"
+        controller.inscription()
+
+        then: "Réponse positive"
+        response.json.toString() == "{\"emailError\":\"\",\"succeed\":\"true\",\"loginError\":\"\"}"
+    }
+
+    void "Test de l'inscription d'un utilisateur non valide"() {
+
+        when: "Appel de l'inescription avec des parametres d'inscription non valides"
+        controller.params.email = "toto"
+        controller.params.login = "toto"
+        controller.params.password = "totototo"
+        controller.inscription()
+
+        then: "Réponse negative"
+        response.json.toString() == "{\"emailError\":\"\",\"succeed\":\"false\",\"loginError\":\"\"}"
+    }
+
+    void "Test de l'inscription d'un utilisateur avec login et email deja utilisé"() {
+
+        User user = new User()
+        user.email = "toto@toto.fr"
+        user.login = "toto"
+        user.password = "totototo"
+        user.save(flush: true)
+
+        when: "Appel de l'inescription avec des parametres d'inscription déjà utilisés"
+        controller.params.email = "toto@toto.fr"
+        controller.params.login = "toto"
+        controller.params.password = "totototo"
+        controller.inscription()
+
+        then: "Réponse negative"
+        response.json.toString() == "{\"emailError\":\"Email déjà utilisé\",\"succeed\":\"false\",\"loginError\":\"Login déjà utilisé\"}"
+    }
+
+    void "Test de mise a jour des champs d'un utilisateur"(){
+        given: "un utilisateur"
+        User user = new User(
+                email: "toto@toto.fr",
+                login: "toto",
+                password: ("totototo").encodeAsMD5(),
+                score: 4
+        )
+        user.save(flush: true)
+        int idUser = user.getId()
+
+        when: "informations d'un utilisateur est modifie"
+        user.email = emailTest
+        user.login = loginTest
+        user.password = passwordTest
+        user.score = scoreTest
+        controller.update(user)
+        User userModel  = User.get(idUser)
+
+        then: "tous les chmaps dans model doivent être modifiés"
+        userModel.login == loginTest
+        userModel.email == emailTest
+        userModel.score == scoreTest
+        userModel.password == passwordTest.encodeAsMD5()
+
+        where:
+        emailTest   |   loginTest   |   passwordTest    |   scoreTest
+        "abc@abc.fr"|   "abcde"     |   "12345678"      |   4
+    }
+
+    void "Test du login d'un utilisateur valide"() {
+
+        User user = new User()
+        user.email = "toto@toto.fr"
+        user.login = "toto"
+        user.password = "totototo"
+        user.save(flush: true)
+
+        when: "Appel du login avec des identifiants corrects"
+        controller.params.email = "toto@toto.fr"
+        controller.params.password = "totototo"
+        controller.login()
+
+        then: "Réponse positive"
+        response.json.toString() == "{\"succeed\":\"true\",\"url\":\"user/index\"}"
+    }
+
+    @Unroll
+    void "Test du login d'un utilisateur avec mauvais identifiants"() {
+
+        User user = new User()
+        user.email = "toto@toto.fr"
+        user.login = "toto"
+        user.password = "totototo"
+        user.isActive = aIsActive
+        user.save(flush: true)
+
+        when: "Appel du login avec des identifiants incorrects"
+        controller.params.email = aEmail
+        controller.params.password = aPassword
+        controller.login()
+
+        then: "Réponse négative"
+        response.json.toString() == "{\"succeed\":\"false\",\"url\":\"\"}"
+
+        where:
+        aIsActive | aEmail         | aPassword
+        true      | "tata@toto.fr" | "titititi"
+        true      | "tata@toto.fr" | "totototo"
+        true      | null           | "totototo"
+        true      | "toto@toto.fr" | null
+        true      | null           | null
+        false     | "toto@toto.fr" | "totototo"
+        false     | "tata@toto.fr" | "titititi"
+        false     | "tata@toto.fr" | "totototo"
+        null      | "tata@toto.fr" | "tititi"
+        null      | "tata@toto.fr" | "totototo"
+        null      | "toto@toto.fr" | "titititi"
+        null      | "toto@toto.fr" | "totototo"
+    }
+
+    void "Test du login d'un utilisateur inactif"() {
+
+        User user = new User()
+        user.email = "toto@toto.fr"
+        user.login = "toto"
+        user.password = "totototo"
+        user.isActive = false
+        user.save(flush: true)
+
+        when: "Appel du login avec des identifiants incorrects"
+        controller.params.email = "toto@toto.fr"
+        controller.params.password = "totototo"
+        controller.login()
+
+        then: "Réponse négative"
+        response.json.toString() == "{\"succeed\":\"false\",\"url\":\"\"}"
+    }
+
 }

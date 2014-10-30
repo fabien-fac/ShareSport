@@ -23,6 +23,60 @@
 			</g:if>
 			<ol class="property-list user">
 			
+				<g:if test="${userInstance?.email}">
+				<li class="fieldcontain">
+					<span id="email-label" class="property-label"><g:message code="user.email.label" default="Email" /></span>
+					
+						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${userInstance}" field="email"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.password}">
+				<li class="fieldcontain">
+					<span id="password-label" class="property-label"><g:message code="user.password.label" default="Password" /></span>
+					
+						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${userInstance}" field="password"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.login}">
+				<li class="fieldcontain">
+					<span id="login-label" class="property-label"><g:message code="user.login.label" default="Login" /></span>
+					
+						<span class="property-value" aria-labelledby="login-label"><g:fieldValue bean="${userInstance}" field="login"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.score}">
+				<li class="fieldcontain">
+					<span id="score-label" class="property-label"><g:message code="user.score.label" default="Score" /></span>
+					
+						<span class="property-value" aria-labelledby="score-label"><g:fieldValue bean="${userInstance}" field="score"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.isActive}">
+				<li class="fieldcontain">
+					<span id="isActive-label" class="property-label"><g:message code="user.isActive.label" default="Is Active" /></span>
+					
+						<span class="property-value" aria-labelledby="isActive-label"><g:formatBoolean boolean="${userInstance?.isActive}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.isAdmin}">
+				<li class="fieldcontain">
+					<span id="isAdmin-label" class="property-label"><g:message code="user.isAdmin.label" default="Is Admin" /></span>
+					
+						<span class="property-value" aria-labelledby="isAdmin-label"><g:formatBoolean boolean="${userInstance?.isAdmin}" /></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
