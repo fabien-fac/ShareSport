@@ -39,19 +39,23 @@
             </div>
             <div class="connect">
                 <g:if test="${session.userId == null}">
-                    <g:form>
+                    <form action='/ShareSport/j_spring_security_check' method='POST'>
                         <ul>
                             <li>
-                                <g:textField name="email" id="email-connect" placeholder="Adresse email"/>
+                                <g:textField name='j_username' id='username' placeholder="Nom d'utilisateur"/>
                             </li>
                             <li>
-                                <g:passwordField name="password" id="password-connect" placeholder="Mot de passe"/>
+                                <g:passwordField name='j_password' id='password' placeholder="Mot de passe"/>
                             </li>
                             <li>
-                                <input type="button" class="button-form" id="button-connect" value="Connexion"/>
+                                <label for='remember_me'>Rester connecté</label>
+                                <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
+                            </li>
+                            <li>
+                                <input type="submit" id="submit" class="button-form" value="Connexion"/>
                             </li>
                         </ul>
-                    </g:form>
+                    </form>
                 </g:if>
                 <g:else>
                     <g:form controller="user" action="logout">
