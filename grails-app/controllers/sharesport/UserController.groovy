@@ -69,7 +69,7 @@ class UserController {
             return
         }
 
-        userService.updateUser(userInstance)
+        userService.saveUser(userInstance)
         flush:true
 
         request.withFormat {
@@ -101,8 +101,15 @@ class UserController {
         }
     }
 
-    def inscription (){
-        render(contentType: 'text/json', encoding: "UTF-8") {userService.inscriptionUser(params)}
+    def signUp (){
+        User user = new User()
+        user.login = params.login
+        user.email = params.email
+        user.password = params.password
+        def result = userService.signUpUser(user)
+        render(contentType: 'text/json', encoding: "UTF-8") {
+            ['succeed': result.succeed, 'emailError' : result.emailError, 'loginError':  result.loginError]
+        }
     }
 
     def login() {

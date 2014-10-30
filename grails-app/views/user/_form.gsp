@@ -4,55 +4,72 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'email', 'error')} required">
 	<label for="email">
-		<g:message code="user.email.label" default="Email" />
-		<span class="required-indicator">*</span>
+        <span class="property-label">
+            <g:message code="user.email.label" default="Email" />
+            <span class="required-indicator">*</span>
+        </span>
 	</label>
-	<g:field type="email" name="email" required="" value="${userInstance?.email}"/>
-
+    <span class="property-value">
+	    <g:field type="email" name="email" required="" value="${userInstance?.email}"/>
+    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
 	<label for="password">
-		<g:message code="user.password.label" default="Password" />
-		<span class="required-indicator">*</span>
+        <span class="property-label">
+            <g:message code="user.password.label" default="Password" />
+            <span class="required-indicator">*</span>
+        </span>
 	</label>
-	<g:field type="password" name="password" maxlength="50" required="" value="${userInstance?.password}"/>
-
+    <span class="property-value">
+    	<g:field type="password" name="password" maxlength="50" required="" value="${userInstance?.password}"/>
+    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'login', 'error')} required">
 	<label for="login">
-		<g:message code="user.login.label" default="Login" />
-		<span class="required-indicator">*</span>
+        <span class="property-label">
+            <g:message code="user.login.label" default="Login" />
+            <span class="required-indicator">*</span>
+        </span>
 	</label>
-	<g:textField name="login" maxlength="20" required="" value="${userInstance?.login}"/>
-
+    <span class="property-value">
+    	<g:textField name="login" maxlength="20" required="" value="${userInstance?.login}"/>
+    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'score', 'error')} required">
 	<label for="score">
-		<g:message code="user.score.label" default="Score" />
-		<span class="required-indicator">*</span>
+        <span class="property-label">
+            <g:message code="user.score.label" default="Score" />
+            <span class="required-indicator">*</span>
+        </span>
 	</label>
-	<g:field name="score" type="number" min="0" value="${userInstance.score}" required=""/>
-
+    <span class="property-value">
+    	<g:field name="score" type="number" min="0" value="${userInstance.score}" required=""/>
+    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'isActive', 'error')} ">
 	<label for="isActive">
-		<g:message code="user.isActive.label" default="Is Active" />
-		
+        <span class="property-label">
+    		<g:message code="user.isActive.label" default="Is Active" />
+        </span>
 	</label>
-	<g:checkBox name="isActive" value="${userInstance?.isActive}" />
-
+    <span class="property-value">
+    	<g:checkBox name="isActive" value="${userInstance?.isActive}" />
+    </span>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'isAdmin', 'error')} ">
 	<label for="isAdmin">
-		<g:message code="user.isAdmin.label" default="Is Admin" />
-		
+        <span class="property-label">
+		    <g:message code="user.isAdmin.label" default="Is Admin" />
+		</span>
 	</label>
-	<g:checkBox name="isAdmin" value="${userInstance?.isAdmin}" />
+    <span class="property-value">
+	    <g:checkBox name="isAdmin" value="${userInstance?.isAdmin}" />
+    </span>
 
 </div>
 

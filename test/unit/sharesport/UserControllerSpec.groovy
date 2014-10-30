@@ -166,7 +166,7 @@ class UserControllerSpec extends Specification {
         controller.params.email = "toto@toto.fr"
         controller.params.login = "toto"
         controller.params.password = "totototo"
-        controller.inscription()
+        controller.signUp()
 
         then: "Réponse positive"
         response.json.toString() == "{\"emailError\":\"\",\"succeed\":\"true\",\"loginError\":\"\"}"
@@ -178,7 +178,7 @@ class UserControllerSpec extends Specification {
         controller.params.email = "toto"
         controller.params.login = "toto"
         controller.params.password = "totototo"
-        controller.inscription()
+        controller.signUp()
 
         then: "Réponse negative"
         response.json.toString() == "{\"emailError\":\"\",\"succeed\":\"false\",\"loginError\":\"\"}"
@@ -196,7 +196,7 @@ class UserControllerSpec extends Specification {
         controller.params.email = "toto@toto.fr"
         controller.params.login = "toto"
         controller.params.password = "totototo"
-        controller.inscription()
+        controller.signUp()
 
         then: "Réponse negative"
         response.json.toString() == "{\"emailError\":\"Email déjà utilisé\",\"succeed\":\"false\",\"loginError\":\"Login déjà utilisé\"}"
