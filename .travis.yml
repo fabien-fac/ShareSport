@@ -7,9 +7,10 @@ deploy:
   provider: heroku
   api_key:
       secure: "fHZVyCR5n6vyxZnooWCfN6r+6AkBlj893dYZXMjH2O3dAwye5qHiJ0ceu//dwIXfr+AZaVAmfOfhnjNxLq+gy8PGbfvMzTRl4Yc3ctWF463Eotznt1TT8e6MQ8yX8ccfshh6NmeyrqHMiLk/CjvpujzeyfJaZm8aN+z69wzQeDI="
-  app: sharesport
+  app:
+      master: sharesportproduction
+      develop: sharesportpreproduction
   on:
       repo: fabien-fac/ShareSport
-      branch: sprint2
   strategy: git
 script: "./grailsw refresh-dependencies && ./grailsw test-app unit:"
