@@ -12,28 +12,23 @@ import org.springframework.web.context.request.RequestContextHolder
 @Transactional
 class UserService {
 
-    def inscriptionUser(Map params) {
+    def signUpUser(User user) {
         String result = ""
         String emailError = ""
         String loginError = ""
-
-        User user = new User()
-        user.login = params.login
-        user.email = params.email
-        user.password = params.password
-
         if(!user.validate()){
-            if(User.findByLogin(params.login)){
+
+            if(User.findByLogin(user.login)){
                 loginError = "Login déjà utilisé"
             }
-            if(User.findByEmail(params.email)){
+            if(User.findByEmail(user.email)){
                 emailError = "Email déjà utilisé"
             }
 
             result = "false"
         }
         else{
-            user.save()
+            saveUser(user)
             result = "true"
         }
 
@@ -48,6 +43,7 @@ class UserService {
         GrailsHttpSession session = request.session
 
         User user = User.findByEmail(paramsEmail)
+
         if (user != null) {
             if (user.password == params.password && user.isActive == true) {
                 session["userId"] = user.id;
@@ -73,8 +69,7 @@ class UserService {
         logoutSuccess
     }
 
-    def updateUser(User user){
-        user.password = user.password.encodeAsMD5()
+    def saveUser(User user){
         user.save()
     }
 }
