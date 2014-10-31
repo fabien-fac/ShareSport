@@ -1,251 +1,67 @@
-html {background-color: #ffffff; background-image: inherit; }
+eded, if any. For
+example, if a third party patent license is required to allow Recipient
+to distribute the Program, it is Recipient's responsibility to acquire
+that license before distributing the Program.</p>
 
-body,
-input, select, textarea {font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;}
+<p class="list">d) Each Contributor represents that to its knowledge it
+has sufficient copyright rights in its Contribution, if any, to grant
+the copyright license set forth in this Agreement.</p>
 
-body {width: 100%; max-width: inherit; box-shadow: none; margin: 0}
+<p><b>3. REQUIREMENTS</b></p>
 
-div#header {width: 100%; height: 80px; background-color: #555555;}
-div#header ul, div#header li {float: left; display: table-cell;}
+<p>A Contributor may choose to distribute the Program in object code
+form under its own license agreement, provided that:</p>
 
-div#header div.nav-header {width: 60%; vertical-align: middle;}
-div#header div.nav-header div.logo-header {float: left; padding: 0 40px;}
-div#header div.nav-header ul {height: 80px; margin: 0; padding: 0;}
-div#header div.nav-header li.btn-header {padding: 0 20px; color: #00c0f7; text-align: center; font-size: 130%;}
-div#header div.nav-header li.btn-header:hover {background-color: #00c0f7; color: #555555; transition: all 0.5s;}
-div#header div.nav-header li.btn-header a{ height: 80px; line-height: 80px; text-decoration: none; font-size: 120%;}
+<p class="list">a) it complies with the terms and conditions of this
+Agreement; and</p>
 
-div#header div.connect {width: 40%; float: right;}
-div#header div.connect ul {float: right; height: 80px; margin: 0; padding: 0;}
-div#header div.connect li {height: 80px; line-height: 80px; padding-right: 10px;}
+<p class="list">b) its license agreement:</p>
 
-div#page-body {width: 80%; margin: 40px auto;}
+<p class="list">i) effectively disclaims on behalf of all Contributors
+all warranties and conditions, express and implied, including warranties
+or conditions of title and non-infringement, and implied warranties or
+conditions of merchantability and fitness for a particular purpose;</p>
 
-div.nav {background-color: #dddddd; margin: 5px; border-radius: 5px;}
-.nav a.home, .nav a.list, .nav a.create{color: #555555;}
-.nav a.home:hover, .nav a.list:hover, .nav a.create:hover{color: #ffffff;}
+<p class="list">ii) effectively excludes on behalf of all Contributors
+all liability for damages, including direct, indirect, special,
+incidental and consequential damages, such as lost profits;</p>
 
-div.body-content{float:left; width:60%; padding: 2%;}
+<p class="list">iii) states that any provisions which differ from this
+Agreement are offered by that Contributor alone and not by any other
+party; and</p>
 
-div.body-content{float:left;}
+<p class="list">iv) states that source code for the Program is available
+from such Contributor, and informs licensees how to obtain it in a
+reasonable manner on or through a medium customarily used for software
+exchange.</p>
 
-.body-content h1{color: #00c0f7; text-transform: uppercase; font-size: 200%}
-.body-content h2{color: #666666; text-transform: uppercase; font-size: 130%}
+<p>When the Program is made available in source code form:</p>
 
-div.body-sidebar{margin-left: 66%; padding: 2%}
-.body-sidebar h1{color: #00c0f7; text-transform: uppercase; font-size: 150%}
-.body-sidebar h2{color: #666666; text-transform: uppercase; font-size: 100%}
+<p class="list">a) it must be made available under this Agreement; and</p>
 
-.connect {width: 50%;}
+<p class="list">b) a copy of this Agreement must be included with each
+copy of the Program.</p>
 
-div#footer {}
+<p>Contributors may not remove or alter any copyright notices contained
+within the Program.</p>
 
+<p>Each Contributor must identify itself as the originator of its
+Contribution, if any, in a manner that reasonably allows subsequent
+Recipients to identify the originator of the Contribution.</p>
 
+<p><b>4. COMMERCIAL DISTRIBUTION</b></p>
 
-/* COMMON */
-hr {border: 0; height: 0; box-shadow: 0 0 3px 1px #00c0f7;}
-hr:after {content: "\00a0";}
-
-input{width: 250px; height: 30px; border-radius: 5px; border: inherit; background-color: #eeeeee; padding-left: 10px;}
-input.error{box-shadow: 0 0 0.5em #cc0000;}
-
-h1{color: #00c0f7; text-transform: uppercase; font-size: 150%}
-h2{color: #666666; text-transform: uppercase; font-size: 130%}
-
-input:focus{box-shadow: 0 0 0.5em #00c0f7; border-radius: 5px;}
-input.button-form, input[type=submit]{width: 120px; padding: 0 10px;}
-input.button-form:hover, input[type=submit]:hover{box-shadow: 0 0 0.5em #00c0f7; background-color: #00c0f7; color: #ffffff; cursor: pointer; transition: 0.2s;}
-
-form table tr:hover {background-color: inherit;}
-
-span.error-form{font-size: small; color: #cc0000; line-height: 2px;}
-
-a {color: inherit;}
-
-/* REPRISE DE main.css */
-/* Table des controllers */
-table.controller-index {
-    border-top: 1px solid #DFDFDF;
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 1em;
-}
-
-tr {
-    border: 0;
-}
-
-tr>td:first-child, tr>th:first-child {
-    padding-left: 1.25em;
-}
-
-tr>td:last-child, tr>th:last-child {
-    padding-right: 1.25em;
-}
-
-td, th {
-    line-height: 1.5em;
-    padding: 0.5em 0.6em;
-    text-align: left;
-    vertical-align: top;
-}
-
-th {
-    background-color: #efefef;
-    background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
-    color: #666666;
-    font-weight: bold;
-    line-height: 1.7em;
-    padding: 0.2em 0.6em;
-}
-
-thead th {
-    white-space: nowrap;
-}
-
-th a {
-    display: block;
-    text-decoration: none;
-}
-
-th a:link, th a:visited {
-    color: #666666;
-}
-
-th a:hover, th a:focus {
-    color: #333333;
-}
-
-th.sortable a {
-    background-position: right;
-    background-repeat: no-repeat;
-    padding-right: 1.1em;
-}
-
-th.asc a {
-    background-image: url(../images/skin/sorted_asc.gif);
-}
-
-th.desc a {
-    background-image: url(../images/skin/sorted_desc.gif);
-}
-
-.odd {
-    background: #f7f7f7;
-}
-
-.even {
-    background: #ffffff;
-}
-
-th:hover, tr:hover {
-    background-color: rgba(0, 192, 247, 0.3);
-}
-
-/* Nav des controllers */
-.nav {
-    background-color: #efefef;
-    padding: 0.5em 0.75em;
-    zoom: 1;
-}
-
-.nav ul {
-    overflow: hidden;
-    padding-left: 0;
-    zoom: 1;
-}
-
-.nav li {
-    display: block;
-    float: left;
-    list-style-type: none;
-    margin-right: 0.5em;
-    padding: 0;
-}
-
-.nav a {
-    color: #666666;
-    display: block;
-    padding: 0.25em 0.7em;
-    text-decoration: none;
-    -moz-border-radius: 0.3em;
-    -webkit-border-radius: 0.3em;
-    border-radius: 0.3em;
-}
-
-.nav a:active, .nav a:visited {
-    color: #666666;
-}
-
-.nav a:focus, .nav a:hover {
-    background-color: #999999;
-    color: #ffffff;
-    outline: none;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-}
-
-.no-borderradius .nav a:focus, .no-borderradius .nav a:hover {
-    background-color: transparent;
-}
-
-.nav a.home, .nav a.list, .nav a.create, .nav a.edit {
-    background-position: 0.7em center;
-    background-repeat: no-repeat;
-    text-indent: 25px;
-}
-
-.nav a.home {
-    background-image: url(../images/skin/house.png);
-}
-
-.nav a.list {
-    background-image: url(../images/skin/database_table.png);
-}
-
-.nav a.create {
-    background-image: url(../images/skin/database_add.png);
-}
-
-.nav a.edit {
-    background-image: url(../images/skin/database_edit.png);
-}
-
-/* Show, edit */
-
-fieldset,
-.property-list {
-    margin: 0.6em 1.25em 0 1.25em;
-    padding: 0.3em 1.8em 1.25em;
-    position: relative;
-    zoom: 1;
-    border: none;
-}
-
-.property-list .fieldcontain {
-    list-style: none;
-    overflow: hidden;
-    zoom: 1;
-}
-
-.fieldcontain {
-    margin-top: 1em;
-}
-
-.fieldcontain label,
-.fieldcontain .property-label {
-    color: #666666;
-    text-align: right;
-    width: 25%;
-}
-
-.fieldcontain .property-label {
-    float: left;
-}
-
-.fieldcontain .property-value {
-    display: block;
-    margin-left: 27%;
-}
+<p>Commercial distributors of software may accept certain
+responsibilities with respect to end users, business partners and the
+like. While this license is intended to facilitate the commercial use of
+the Program, the Contributor who includes the Program in a commercial
+product offering should do so in a manner which does not create
+potential liability for other Contributors. Therefore, if a Contributor
+includes the Program in a commercial product offering, such Contributor
+(&quot;Commercial Contributor&quot;) hereby agrees to defend and
+indemnify every other Contributor (&quot;Indemnified Contributor&quot;)
+against any losses, damages and costs (collectively &quot;Losses&quot;)
+arising from claims, lawsuits and other legal actions brought by a third
+party against the Indemnified Contributor to the extent caused by the
+acts or omissions of such Commercial Contributor in connection with its
+distribution of t
