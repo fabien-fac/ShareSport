@@ -96,6 +96,7 @@
                 </p>
             </div>
             <div class="body-sidebar">
+            <sec:ifNotLoggedIn>
                 <h1>Formulaire d'inscription</h1>
                 <g:form>
                     <table>
@@ -122,6 +123,7 @@
                         </tr>
                     </table>
                 </g:form>
+            </sec:ifNotLoggedIn>
             </div>
 		</div>
 	</body>

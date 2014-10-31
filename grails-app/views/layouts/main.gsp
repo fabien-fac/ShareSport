@@ -38,8 +38,9 @@
                 </ul>
             </div>
             <div class="connect">
-                <g:if test="${session.userId == null}">
-                    <form action='/ShareSport/j_spring_security_check' method='POST'>
+                <sec:ifNotLoggedIn>
+
+                    <form action='/j_spring_security_check' method='POST' id="form_login">
                         <ul>
                             <li>
                                 <g:textField name='j_username' id='username' placeholder="Nom d'utilisateur"/>
@@ -56,16 +57,16 @@
                             </li>
                         </ul>
                     </form>
-                </g:if>
-                <g:else>
-                    <g:form controller="user" action="logout">
+                </sec:ifNotLoggedIn>
+                <sec:ifLoggedIn>
+                    <g:form controller="logout">
                         <ul>
                             <li>
                                 <g:submitButton name="logout" value="Deconnexion"/>
                             </li>
                         </ul>
                     </g:form>
-                </g:else>
+                </sec:ifLoggedIn>
             </div>
         </div>
 		<g:layoutBody/>

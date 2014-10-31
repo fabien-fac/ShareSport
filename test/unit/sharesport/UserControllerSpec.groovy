@@ -11,18 +11,24 @@ import org.springframework.transaction.TransactionStatus
 class UserControllerSpec extends Specification {
 
     UserService userTestService = new UserService()
+    SecureRoleService secureRoleService = new SecureRoleService()
 
     def setup() {
         userTestService.transactionManager = Mock(PlatformTransactionManager) {
             getTransaction(_) >> Mock(TransactionStatus)
         }
         controller.userService = userTestService
+
+        secureRoleService.transactionManager = Mock(PlatformTransactionManager) {
+            getTransaction(_) >> Mock(TransactionStatus)
+        }
+        controller.userService.secureRoleService = secureRoleService
     }
 
     def populateValidParams(params) {
         assert params != null
         params["email"] = "email@gmail.com"
-        params["login"] = "login"
+        params["username"] = "login"
         params["password"] = "password"
         //params["name"] = 'someValidName'
     }
@@ -164,7 +170,7 @@ class UserControllerSpec extends Specification {
 
         when: "Appel de l'inescription avec des parametres d'inscription valides"
         controller.params.email = "toto@toto.fr"
-        controller.params.login = "toto"
+        controller.params.username = "toto"
         controller.params.password = "totototo"
         controller.signUp()
 
@@ -176,7 +182,7 @@ class UserControllerSpec extends Specification {
 
         when: "Appel de l'inescription avec des parametres d'inscription non valides"
         controller.params.email = "toto"
-        controller.params.login = "toto"
+        controller.params.username = "toto"
         controller.params.password = "totototo"
         controller.signUp()
 
@@ -184,17 +190,17 @@ class UserControllerSpec extends Specification {
         response.json.toString() == "{\"emailError\":\"\",\"succeed\":\"false\",\"loginError\":\"\"}"
     }
 
-    void "Test de l'inscription d'un utilisateur avec login et email deja utilisé"() {
+    void "Test de l'inscription d'un utilisateur avec username et email deja utilisé"() {
 
         User user = new User()
         user.email = "toto@toto.fr"
-        user.login = "toto"
+        user.username = "toto"
         user.password = "totototo"
         user.save(flush: true)
 
         when: "Appel de l'inescription avec des parametres d'inscription déjà utilisés"
         controller.params.email = "toto@toto.fr"
-        controller.params.login = "toto"
+        controller.params.username = "toto"
         controller.params.password = "totototo"
         controller.signUp()
 
@@ -206,8 +212,8 @@ class UserControllerSpec extends Specification {
         given: "un utilisateur"
         User user = new User(
                 email: "toto@toto.fr",
-                login: "toto",
-                password: ("totototo").encodeAsMD5(),
+                username: "toto",
+                password: "totototo",
                 score: 4
         )
         user.save(flush: true)
@@ -215,90 +221,21 @@ class UserControllerSpec extends Specification {
 
         when: "informations d'un utilisateur est modifie"
         user.email = emailTest
-        user.login = loginTest
+        user.username = loginTest
         user.password = passwordTest
         user.score = scoreTest
         controller.update(user)
         User userModel  = User.get(idUser)
 
         then: "tous les chmaps dans model doivent être modifiés"
-        userModel.login == loginTest
+        userModel.username == loginTest
         userModel.email == emailTest
         userModel.score == scoreTest
-        userModel.password == passwordTest.encodeAsMD5()
+        userModel.password == passwordTest
 
         where:
         emailTest   |   loginTest   |   passwordTest    |   scoreTest
         "abc@abc.fr"|   "abcde"     |   "12345678"      |   4
-    }
-
-    void "Test du login d'un utilisateur valide"() {
-
-        User user = new User()
-        user.email = "toto@toto.fr"
-        user.login = "toto"
-        user.password = "totototo"
-        user.save(flush: true)
-
-        when: "Appel du login avec des identifiants corrects"
-        controller.params.email = "toto@toto.fr"
-        controller.params.password = "totototo"
-        controller.login()
-
-        then: "Réponse positive"
-        response.json.toString() == "{\"succeed\":\"true\",\"url\":\"user/index\"}"
-    }
-
-    @Unroll
-    void "Test du login d'un utilisateur avec mauvais identifiants"() {
-
-        User user = new User()
-        user.email = "toto@toto.fr"
-        user.login = "toto"
-        user.password = "totototo"
-        user.isActive = aIsActive
-        user.save(flush: true)
-
-        when: "Appel du login avec des identifiants incorrects"
-        controller.params.email = aEmail
-        controller.params.password = aPassword
-        controller.login()
-
-        then: "Réponse négative"
-        response.json.toString() == "{\"succeed\":\"false\",\"url\":\"\"}"
-
-        where:
-        aIsActive | aEmail         | aPassword
-        true      | "tata@toto.fr" | "titititi"
-        true      | "tata@toto.fr" | "totototo"
-        true      | null           | "totototo"
-        true      | "toto@toto.fr" | null
-        true      | null           | null
-        false     | "toto@toto.fr" | "totototo"
-        false     | "tata@toto.fr" | "titititi"
-        false     | "tata@toto.fr" | "totototo"
-        null      | "tata@toto.fr" | "tititi"
-        null      | "tata@toto.fr" | "totototo"
-        null      | "toto@toto.fr" | "titititi"
-        null      | "toto@toto.fr" | "totototo"
-    }
-
-    void "Test du login d'un utilisateur inactif"() {
-
-        User user = new User()
-        user.email = "toto@toto.fr"
-        user.login = "toto"
-        user.password = "totototo"
-        user.isActive = false
-        user.save(flush: true)
-
-        when: "Appel du login avec des identifiants incorrects"
-        controller.params.email = "toto@toto.fr"
-        controller.params.password = "totototo"
-        controller.login()
-
-        then: "Réponse négative"
-        response.json.toString() == "{\"succeed\":\"false\",\"url\":\"\"}"
     }
 
 }

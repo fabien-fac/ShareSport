@@ -1,5 +1,6 @@
 package sharesport
 
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,20 +10,24 @@ class HashtagController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Hashtag.list(params), model: [hashtagInstanceCount: Hashtag.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def show(Hashtag hashtagInstance) {
         respond hashtagInstance
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         respond new Hashtag(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def save(Hashtag hashtagInstance) {
         if (hashtagInstance == null) {
             notFound()
@@ -45,11 +50,13 @@ class HashtagController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Hashtag hashtagInstance) {
         respond hashtagInstance
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def update(Hashtag hashtagInstance) {
         if (hashtagInstance == null) {
             notFound()
@@ -73,6 +80,7 @@ class HashtagController {
     }
 
     @Transactional
+
     def delete(Hashtag hashtagInstance) {
 
         if (hashtagInstance == null) {

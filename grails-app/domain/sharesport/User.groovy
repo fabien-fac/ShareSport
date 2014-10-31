@@ -20,7 +20,7 @@ class User {
 		username blank: false, unique: true, minSize: 4, maxSize: 20
 		password blank: false, password: true
         score min: 0
-        email email: true
+        email email: true, unique: true, blank: false
 	}
 
 	static mapping = {

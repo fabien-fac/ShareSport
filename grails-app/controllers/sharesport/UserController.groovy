@@ -1,6 +1,6 @@
 package sharesport
 
-import org.springframework.security.access.annotation.Secured
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -74,7 +74,7 @@ class UserController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = "Utilisateur \""+userInstance.login+"\" est modifié"
+                flash.message = "Utilisateur \""+userInstance.username+"\" est modifié"
                 redirect userInstance
             }
             '*'{ respond userInstance, [status: OK] }
@@ -103,7 +103,7 @@ class UserController {
 
     def signUp (){
         User user = new User()
-        user.login = params.login
+        user.username = params.username
         user.email = params.email
         user.password = params.password
         def result = userService.signUpUser(user)

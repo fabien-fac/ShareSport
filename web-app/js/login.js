@@ -42,6 +42,8 @@ $( document ).ready(function() {
 
     });
 
+    $("#form_login").attr("action", getApplicationUrl() + "j_spring_security_check");
+
 });
 
 var processingLoginResponse = function (response) {

@@ -12,13 +12,16 @@ import org.springframework.web.context.request.RequestContextHolder
 @Transactional
 class UserService {
 
+    SecureRoleService secureRoleService
+
     def signUpUser(User user) {
+
         String result = ""
         String emailError = ""
         String loginError = ""
         if(!user.validate()){
 
-            if(User.findByLogin(user.login)){
+            if(User.findByUsername(user.username)){
                 loginError = "Login déjà utilisé"
             }
             if(User.findByEmail(user.email)){
@@ -28,45 +31,12 @@ class UserService {
             result = "false"
         }
         else{
-            saveUser(user)
+            User u = user.save()
+            UserSecureRole.create u, secureRoleService.getRoleUser(), true
             result = "true"
         }
 
         ['succeed': result, 'emailError': emailError, 'loginError': loginError]
-    }
-
-    def login(Map params) {
-
-        boolean loginSuccess = false
-        String paramsEmail = params.email
-        GrailsWebRequest request = RequestContextHolder.currentRequestAttributes()
-        GrailsHttpSession session = request.session
-
-        User user = User.findByEmail(paramsEmail)
-
-        if (user != null) {
-            if (user.password == params.password && user.isActive == true) {
-                session["userId"] = user.id;
-                loginSuccess = true
-            }
-        }
-
-        loginSuccess
-    }
-
-    def logout() {
-
-        boolean logoutSuccess = false
-        GrailsWebRequest request = RequestContextHolder.currentRequestAttributes()
-        GrailsHttpSession session = request.session
-
-        long userId = session["userId"]
-
-        if (userId != null) {
-            session.invalidate()
-            logoutSuccess = true
-        }
-        logoutSuccess
     }
 
     def saveUser(User user){

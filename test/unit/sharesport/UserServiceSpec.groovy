@@ -25,15 +25,11 @@ class UserServiceSpec extends Specification{
     def setup() {
         userService = new UserService()
         userService.transactionManager = Mock(PlatformTransactionManager) { getTransaction(_) >> Mock(TransactionStatus) }
-        //print "hello"
         userTest = Mock(User)
 
         mockDomain(User, [
-                [email: "abc@abc.com", password: "12345678",login: "abcde", score: 0]
+                [email: "abc@abc.com", password: "12345678",username: "abcde", score: 0]
         ])
-
-        /*def request = GrailsWebUtil.bindMockWebRequest()
-        RequestContextHolder.setRequestAttributes(request);*/
     }
 
     def "test parametre d'insription d'utilisateur invalide"(){
@@ -41,7 +37,7 @@ class UserServiceSpec extends Specification{
         def username = "abcde"
         def email = "abc@abc.com"
         def password = "12345678"
-        userTest.login >> username
+        userTest.username >> username
         userTest.email >> email
         userTest.password >> password
         userTest.score >> 0
@@ -52,35 +48,7 @@ class UserServiceSpec extends Specification{
 
         then: "le compte ne peut pas etre cree"
         result.succeed == "false"
-        //result.emailError == "Email déjà utilisé"
-        //result.loginError == "Login déjà utilisé"
+
     }
-/*
-    def "test logout reussit"(){
-        given: "utilisateur se connecte"
-        def username = "abcde"
-        def email = "abc@abc.com"
-        def password = "12345678"
-        userTest.login >> username
-        userTest.email >> email
-        userTest.password >> password
-        userTest.score >> 0
 
-        Map params = [login:username, password: password, email: email]
-        userService.login(params)
-
-        when: "utilisateur se déconnecte"
-        def result = userService.logout()
-
-        then: "utilisateur est déconnecte"
-        result
-    }
-*/
-    /*
-    def "test logout echec"(){
-        given: "user invalide"
-
-        when: "utilisateur se déconnecte avec "
-    }
-    */
 }

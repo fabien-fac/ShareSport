@@ -35,7 +35,7 @@ $( document ).ready(function() {
             var xmlRequest = $.ajax({
                 type: "POST",
                 url: baseUrl+"user/signUp",
-                data: {"email": $( "#email-signin").val(), "login": $( "#login-signin").val(), "password": $( "#password-signin").val()}
+                data: {"email": $( "#email-signin").val(), "username": $( "#login-signin").val(), "password": $( "#password-signin").val()}
             });
 
             xmlRequest.done( function(response){
