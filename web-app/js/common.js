@@ -3,9 +3,9 @@
  */
 
 $( document ).ready(function() {
-    var pathname = window.location.pathname;
-    if(pathname.indexOf("login/auth?login_error=") >= 0){
-        $("form-connect").hide();
+    var url = window.location.href;
+    if(url.indexOf("login/auth?login_error=") >= 0){
+        $("#form-connect").hide();
     }
 });
 
