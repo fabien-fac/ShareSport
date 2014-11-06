@@ -37,7 +37,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="connect">
+            <div class="connect" id="form-connect">
                 <sec:ifNotLoggedIn>
 
                     <form action='/j_spring_security_check' method='POST' id="form_login">
