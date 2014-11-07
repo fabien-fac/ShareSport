@@ -4,16 +4,13 @@ package sharesport
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(MessageController)
-@Mock(Message)
-class MessageControllerSpec extends Specification {
+@TestFor(SportController)
+@Mock(Sport)
+class SportControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        params["editor"] = Mock(User)
-        params["content"] = 'Contenu message'
-        params["date"] = new Date()
+        params["name"] = 'rugby'
     }
 
     void "Test the index action returns the correct model"() {
@@ -22,8 +19,8 @@ class MessageControllerSpec extends Specification {
         controller.index()
 
         then: "The model is correct"
-        !model.messageInstanceList
-        model.messageInstanceCount == 0
+        !model.sportInstanceList
+        model.sportInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -31,32 +28,32 @@ class MessageControllerSpec extends Specification {
         controller.create()
 
         then: "The model is correctly created"
-        model.messageInstance != null
+        model.sportInstance != null
     }
 
     void "Test the save action correctly persists an instance"() {
 
         when: "The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
-        def message = new Message()
-        message.validate()
-        controller.save(message)
+        def sport = new Sport()
+        sport.validate()
+        controller.save(sport)
 
         then: "The create view is rendered again with the correct model"
-        model.messageInstance != null
+        model.sportInstance != null
         view == 'create'
 
         when: "The save action is executed with a valid instance"
         response.reset()
         populateValidParams(params)
-        message = new Message(params)
+        sport = new Sport(params)
 
-        controller.save(message)
+        controller.save(sport)
 
         then: "A redirect is issued to the show action"
-        response.redirectedUrl == '/message/show/1'
+        response.redirectedUrl == '/sport/show/1'
         controller.flash.message != null
-        Message.count() == 1
+        Sport.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +65,11 @@ class MessageControllerSpec extends Specification {
 
         when: "A domain instance is passed to the show action"
         populateValidParams(params)
-        def message = new Message(params)
-        controller.show(message)
+        def sport = new Sport(params)
+        controller.show(sport)
 
         then: "A model is populated containing the domain instance"
-        model.messageInstance == message
+        model.sportInstance == sport
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +81,11 @@ class MessageControllerSpec extends Specification {
 
         when: "A domain instance is passed to the edit action"
         populateValidParams(params)
-        def message = new Message(params)
-        controller.edit(message)
+        def sport = new Sport(params)
+        controller.edit(sport)
 
         then: "A model is populated containing the domain instance"
-        model.messageInstance == message
+        model.sportInstance == sport
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -97,28 +94,28 @@ class MessageControllerSpec extends Specification {
         controller.update(null)
 
         then: "A 404 error is returned"
-        response.redirectedUrl == '/message/index'
+        response.redirectedUrl == '/sport/index'
         flash.message != null
 
 
         when: "An invalid domain instance is passed to the update action"
         response.reset()
-        def message = new Message()
-        message.validate()
-        controller.update(message)
+        def sport = new Sport()
+        sport.validate()
+        controller.update(sport)
 
         then: "The edit view is rendered again with the invalid instance"
         view == 'edit'
-        model.messageInstance == message
+        model.sportInstance == sport
 
         when: "A valid domain instance is passed to the update action"
         response.reset()
         populateValidParams(params)
-        message = new Message(params).save(flush: true)
-        controller.update(message)
+        sport = new Sport(params).save(flush: true)
+        controller.update(sport)
 
         then: "A redirect is issues to the show action"
-        response.redirectedUrl == "/message/show/$message.id"
+        response.redirectedUrl == "/sport/show/$sport.id"
         flash.message != null
     }
 
@@ -128,23 +125,23 @@ class MessageControllerSpec extends Specification {
         controller.delete(null)
 
         then: "A 404 is returned"
-        response.redirectedUrl == '/message/index'
+        response.redirectedUrl == '/sport/index'
         flash.message != null
 
         when: "A domain instance is created"
         response.reset()
         populateValidParams(params)
-        def message = new Message(params).save(flush: true)
+        def sport = new Sport(params).save(flush: true)
 
         then: "It exists"
-        Message.count() == 1
+        Sport.count() == 1
 
         when: "The domain instance is passed to the delete action"
-        controller.delete(message)
+        controller.delete(sport)
 
         then: "The instance is deleted"
-        Message.count() == 0
-        response.redirectedUrl == '/message/index'
+        Sport.count() == 0
+        response.redirectedUrl == '/sport/index'
         flash.message != null
     }
 }

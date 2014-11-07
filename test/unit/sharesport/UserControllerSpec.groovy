@@ -7,7 +7,7 @@ import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.TransactionStatus
 
 @TestFor(UserController)
-@Mock(User)
+@Mock([User, SecureRole, UserSecureRole])
 class UserControllerSpec extends Specification {
 
     UserService userTestService = new UserService()
@@ -74,6 +74,14 @@ class UserControllerSpec extends Specification {
         response.redirectedUrl == '/user/show/1'
         controller.flash.message != null
         User.count() == 1
+    }
+
+    void "Test that saving null user returns 404"() {
+        when:"The save action is executed with null user"
+        controller.save(null)
+
+        then:"A 404 error is returned"
+        response.status == 404
     }
 
     void "Test that the show action returns the correct model"() {
