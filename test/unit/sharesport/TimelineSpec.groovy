@@ -17,7 +17,17 @@ class TimelineSpec extends Specification {
 
     def cleanup() {
     }
+/*
+    void "test la date de creation de timeline"() {
+        when: "timeline est créé"
+        timeline = new Timeline()
 
-    void "test something"() {
+        Date now = new Date()
+        Date createdDateTimeline = timeline.dateCreated
+
+        then: "date de création de timeline est la meme que la date courante"
+        createdDateTimeline.getTimeString() == now.getTimeString()
     }
+    */
+
 }

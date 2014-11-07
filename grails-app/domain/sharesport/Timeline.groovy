@@ -4,6 +4,8 @@ class Timeline {
 
     static hasMany = [messages:Message]
 
+    Date dateCreated
+
     static constraints = {
 
     }
