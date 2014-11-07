@@ -11,7 +11,9 @@ class MessageControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params["editor"] = Mock(User)
+        params["content"] = 'Contenu message'
+        params["date"] = new Date()
     }
 
     void "Test the index action returns the correct model"() {
