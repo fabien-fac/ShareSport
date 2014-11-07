@@ -76,6 +76,14 @@ class UserControllerSpec extends Specification {
         User.count() == 1
     }
 
+    void "Test that saving null user returns 404"() {
+        when:"The save action is executed with null user"
+        controller.save(null)
+
+        then:"A 404 error is returned"
+        response.status == 404
+    }
+
     void "Test that the show action returns the correct model"() {
         when: "The show action is executed with a null domain"
         controller.show(null)
