@@ -112,26 +112,6 @@ class UserController {
         }
     }
 
-    def login() {
-        Boolean result = userService.login(params)
-        String urlToRedirect = ""
-        if(result){
-            urlToRedirect = "user/index"
-        }
-
-        render(contentType: 'text/json', encoding: "UTF-8") {['succeed': result.toString(), 'url': urlToRedirect] }
-    }
-
-    def logout() {
-        Boolean result = userService.logout()
-        String urlToRedirect = ""
-        if(result)
-        {
-            redirect(uri:'/')
-        }
-
-    }
-
     protected void notFound() {
         request.withFormat {
             form multipartForm {

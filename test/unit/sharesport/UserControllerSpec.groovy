@@ -7,7 +7,7 @@ import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.TransactionStatus
 
 @TestFor(UserController)
-@Mock(User)
+@Mock([User, SecureRole, UserSecureRole])
 class UserControllerSpec extends Specification {
 
     UserService userTestService = new UserService()
