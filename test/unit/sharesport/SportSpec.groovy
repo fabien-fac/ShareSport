@@ -34,7 +34,6 @@ class SportSpec extends Specification {
 
         where:
         aName        | _
-        "    "       | _
         "Vélo"       | _
         "Basket"     | _
         "Bask3t"     | _
