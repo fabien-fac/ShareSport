@@ -30,4 +30,21 @@ class IntegrationTimelineSpec extends Specification {
         timeline.getMessages().contains(msg1)
         timeline.getMessages().contains(msg2)
     }
+
+    void "test de suppression de timeline"(){
+        given: "des messages dans timeline"
+        User user = User.findByUsername("admin")
+        Message msg1 = new Message(editor: user, content: "abc", date: new Date())
+        Message msg2 = new Message(editor: user, content: "abc", date: new Date())
+        timeline.addToMessages(msg1)
+        timeline.addToMessages(msg2)
+        timeline.save(flush: true)
+
+        when: "un utilisateur supprimme le timeline"
+        timeline.delete(flush: true)
+
+        then: "les messages dans le timeline sont supprimmé"
+        Message.findByContent("abc") == null
+
+    }
 }
