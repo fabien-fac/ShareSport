@@ -27,7 +27,7 @@
                 </div>
                 <ul>
                     <li class="btn-header">
-                        <a href="">Item 1</a>
+                        <g:link controller="event" action="index">Les événements</g:link>
                     </li>
                     <li class="btn-header">
                         <a href="">Item 2</a>
