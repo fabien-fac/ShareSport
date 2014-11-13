@@ -40,6 +40,6 @@ class UserService {
     }
 
     def saveUser(User user){
-        user.save()
+        return user.save(flush: true)
     }
 }

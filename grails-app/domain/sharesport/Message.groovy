@@ -6,7 +6,8 @@ class Message {
     String content
     Date date
 
-    static belongsTo = [editor:User]
+
+    static belongsTo = [editor:User, timeline: Timeline]
 
     static constraints = {
         content blank: false
