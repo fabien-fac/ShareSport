@@ -5,7 +5,13 @@ import grails.transaction.Transactional
 @Transactional
 class EventService {
 
-    def getEventWithCriteria(Map params) {
+    def serviceGetEvents(Map params) {
+
+        def listeTotal = getEventWithCriteria(params)
+        [ eventInstanceList:listeTotal, eventInstanceTotal:listeTotal.totalCount ]
+    }
+
+    private def getEventWithCriteria(Map params) {
         String titreEvent = params.titre
         String sportTitreEvent = params.sport
         String hashtagEvent = params.hashtag
