@@ -81,7 +81,7 @@
 		</style>-->
 	</head>
 	<body>
-		<div id="page-body" role="main">
+		<div class="page-body" role="main">
             <div class="body-content">
                 <h1>Welcome to ShareSport</h1>
                 <p>
