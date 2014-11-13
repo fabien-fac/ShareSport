@@ -39,23 +39,26 @@
             </div>
             <div class="connect" id="form-connect">
                 <sec:ifNotLoggedIn>
-
                     <form action='/j_spring_security_check' method='POST' id="form_login">
-                        <ul>
-                            <li>
-                                <g:textField name='j_username' id='username' placeholder="Nom d'utilisateur"/>
-                            </li>
-                            <li>
-                                <g:passwordField name='j_password' id='password' placeholder="Mot de passe"/>
-                            </li>
-                            <li>
-                                <label for='remember_me'>Rester connecté</label>
-                                <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
-                            </li>
-                            <li>
-                                <input type="submit" id="submit" class="button-form" value="Connexion"/>
-                            </li>
-                        </ul>
+                        <table id="connect-form">
+                            <tr>
+                                <td>
+                                    <g:textField name='j_username' id='username' placeholder="Nom d'utilisateur"/>
+                                </td>
+                                <td>
+                                    <g:passwordField name='j_password' id='password' placeholder="Mot de passe"/>
+                                </td>
+                                <td>
+                                    <input type="submit" id="submit" class="button-form" value="Connexion"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
+                                    <label for='remember_me'>Rester connecté</label>
+                                </td>
+                            </tr>
+                        </table>
                     </form>
                 </sec:ifNotLoggedIn>
                 <sec:ifLoggedIn>
