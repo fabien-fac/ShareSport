@@ -14,6 +14,7 @@ class MessageControllerSpec extends Specification {
         params["editor"] = Mock(User)
         params["content"] = 'Contenu message'
         params["date"] = new Date()
+        params["timeline"] = Mock(Timeline)
     }
 
     void "Test the index action returns the correct model"() {
