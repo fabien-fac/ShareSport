@@ -8,7 +8,7 @@ class EventService {
     def serviceGetEvents(Map params) {
 
         def listeTotal = getEventWithCriteria(params)
-        [ eventInstanceList:listeTotal, eventInstanceTotal:listeTotal.totalCount ]
+        [ eventInstanceList:listeTotal, eventInstanceCount:listeTotal.totalCount ]
     }
 
     private def getEventWithCriteria(Map params) {

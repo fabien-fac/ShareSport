@@ -9,22 +9,26 @@ import grails.transaction.Transactional
 class EventController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    EventService eventService
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Event.list(params), model: [eventInstanceCount: Event.count()]
+        eventService.serviceGetEvents(params)
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def show(Event eventInstance) {
         respond eventInstance
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def create() {
         respond new Event(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def save(Event eventInstance) {
         if (eventInstance == null) {
             notFound()
@@ -47,11 +51,13 @@ class EventController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Event eventInstance) {
         respond eventInstance
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def update(Event eventInstance) {
         if (eventInstance == null) {
             notFound()
@@ -75,6 +81,7 @@ class EventController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(Event eventInstance) {
 
         if (eventInstance == null) {
