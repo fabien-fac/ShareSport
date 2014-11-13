@@ -22,7 +22,8 @@ class MessageSpec extends Specification {
 
         given: "pour un message valide"
         User editor = Mock(User)
-        message = new Message(editor: editor, date: new Date(), content: "test")
+        Timeline timeline = Mock(Timeline)
+        message = new Message(editor: editor, date: new Date(), content: "test", timeline: timeline)
 
         when: "lors de la validation du message"
         def res = message.validate()
@@ -36,7 +37,7 @@ class MessageSpec extends Specification {
     void "test des contraintes pour un message non valide [#anEditor, #aContent]"() {
 
         given: "pour un message non valide"
-        message = new Message(editor: anEditor, date: new Date(), content: aContent)
+        message = new Message(editor: anEditor, date: new Date(), content: aContent, timeline: aTimeline)
 
         when: "lors de la validation du message"
         def res = message.validate()
@@ -47,8 +48,8 @@ class MessageSpec extends Specification {
 
         where:
 
-        anEditor | aContent
-        null     | ""
-        null     | null
+        anEditor | aContent | aTimeline
+        null     | ""       | null
+        null     | null     | null
     }
 }
