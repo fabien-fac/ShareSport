@@ -98,7 +98,7 @@ div#header div.nav-header li.btn-header a{ height: 80px; line-height: 80px; text
 div#header div.connect {float: right;}
 div#header div.connect ul {float: right; height: 80px; margin: 0; padding: 0;}
 div#header div.connect li {height: 80px; line-height: 80px; padding-right: 10px;}
-div#header div.connect input {width: 150px; display: table-cell; vertical-align: middle;}
+div#header div.connect input {width: 150px;}
 div#header div.connect label {font-size: 85%; color: #FFFFFF;}
 div#header div.connect table#connect-form td {padding: 2px 5px;}
 div#header div.connect table#connect-form tr>td:first-child, tr>th:first-child {width: 150px;}
