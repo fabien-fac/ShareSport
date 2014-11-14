@@ -127,3 +127,13 @@ div.body-sidebar{margin-left: 66%; padding: 2%}
 .body-sidebar .most-popular {background-color: #999999}
 
 div#footer {}
+
+/* SPRING SECURITY */
+#login .inner {width: 40% !important; border-radius: 10px; background-color: #FFFFFF !important; width: 500px !important;}
+#login .inner .fheader {background-color: #555555 !important; color: #00c0f7 !important; border-radius: 10px 10px 0 0;}
+#login .inner #loginForm {padding: 15px; }
+#login .inner #loginForm p {margin: inherit}
+#login .inner #loginForm label {width: 200px;}
+#login .inner #loginForm input[type='text'], #login .inner #loginForm input[type='password'] {width: inherit;}
+#login #remember_me_holder {padding-left: 210px !important;}
+#login #submit {margin-left: 100px !important;}

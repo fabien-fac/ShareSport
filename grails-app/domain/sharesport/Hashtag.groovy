@@ -4,6 +4,8 @@ class Hashtag {
 
     String label
 
+    static belongsTo = [event: Event]
+
     static constraints = {
         label blank: false
         label minSize: 3
