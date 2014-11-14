@@ -14,7 +14,9 @@ class EventController {
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        eventService.serviceGetEvents(params)
+        Map map = eventService.serviceGetEvents(params)
+        map["sportList"]= Sport.list()
+        map
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
