@@ -16,6 +16,8 @@ class User {
 
 	static transients = ['springSecurityService']
 
+    static hasMany = [messages:Message]
+
 	static constraints = {
 		username blank: false, unique: true, minSize: 4, maxSize: 20
 		password blank: false, password: true
