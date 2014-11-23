@@ -10,6 +10,7 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+    byte[] picture
 
     String email
     Integer score = 0
@@ -21,6 +22,7 @@ class User {
 		password blank: false, password: true
         score min: 0
         email email: true, unique: true, blank: false
+        picture nullable: true, maxSize: 1024*1024
 	}
 
 	static mapping = {

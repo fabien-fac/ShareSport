@@ -9,8 +9,9 @@ import grails.transaction.Transactional
 class UserController {
 
     UserService userService
+    def springSecurityService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update:["POST","PUT"], delete: "DELETE"]
 
     @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
@@ -119,6 +120,25 @@ class UserController {
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
+        }
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def getUsername() {
+        User user = springSecurityService.getCurrentUser()
+        def username = user?.getUsername()
+        render(contentType: 'text/json', encoding: "UTF-8") {['userName': username]}
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def getImage() {
+        String userName = params.user
+        def img = User.findByUsername(userName)?.picture
+        if(img != null) {
+            response.setContentLength(img.length)
+            response.contentType = 'image/png'
+            response.outputStream << img
+            response.outputStream.flush()
         }
     }
 }
