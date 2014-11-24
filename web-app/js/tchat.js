@@ -14,11 +14,10 @@ $(document).ready(function() {
         loadUsername();
         loadTchat();
 
-        /*
         intervalTchat = setInterval(function () {
             loadTchat();
         },3000);
-        */
+
     }
 
     $('#input-tchat').keypress(function(event) {

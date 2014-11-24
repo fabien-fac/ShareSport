@@ -1,6 +1,9 @@
 package sharesport
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.codehaus.groovy.grails.core.io.ResourceLocator
+import org.springframework.core.io.Resource
+import org.springframework.core.io.ResourceLoader
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -134,11 +137,18 @@ class UserController {
     def getImage() {
         String userName = params.user
         def img = User.findByUsername(userName)?.picture
-        if(img != null) {
+
+        if(img == null){
+            ResourceLoader resourceLoader = new org.springframework.core.io.DefaultResourceLoader ()
+            final Resource image = resourceLoader.getResource('/web-app/images/sharesport_logo.png')
+            render file: image.inputStream, contentType: 'image/png'
+        }
+        else{
             response.setContentLength(img.length)
             response.contentType = 'image/png'
             response.outputStream << img
             response.outputStream.flush()
         }
+
     }
 }
