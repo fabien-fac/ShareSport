@@ -11,42 +11,71 @@
         <div class="page-body">
             <div class="body-content">
                 <h1>Les événements</h1>
-                <g:form controller="event" action="index">
-                    <g:textField name="titre" placeholder="Titre"/>
-                    <g:textField name="sport" placeholder="Sport"/>
-                    <g:textField name="hashtag" placeholder="Hashtag"/>
-                    <g:textField name="auteur" placeholder="Auteur"/>
-                    <g:submitButton name="Chercher"/>
-                </g:form>
-                <div id="list-event" class="content scaffold-list" role="main">
-                <g:each in="${eventInstanceList}" status="i" var="eventInstance">
-                    <div class="event">
-                        <img src="${resource(dir: 'images', file: 'sharesport_logo.png')}" alt="ShareSport" height="80px"/>
-                        <p><g:link action="show" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "titre")}</g:link></p>
-                        <p>${fieldValue(bean: eventInstance, field: "sport.name")}</p>
-                        <p> <g:formatDate date="${eventInstance.begin_date}" /></p>
+                <div class="sub-body">
+                    <div class="title-sub-body">
+                        <h2>Trouver un événement</h2>
                     </div>
+                    <g:form controller="event" action="index">
+                        <table class="search-event">
+                            <tr>
+                                <td>
+                                    <g:textField name="titre" placeholder="Titre..."/>
+                                </td>
+                                <td>
+                                    <g:textField name="auteur" placeholder="Auteur..."/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <g:textField name="hashtag" placeholder="Hashtag..."/>
+                                </td>
+                                <td>
+                                    <g:select name="sport" from="${sportList}" noSelection="${["":'Choisir un sport...']}" optionKey="name" optionValue="name"></g:select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <g:submitButton name="Chercher"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </g:form>
+                </div>
+                <br/>
+                <div class="sub-body">
+                    <div class="title-sub-body">
+                        <h2>Liste des événements</h2>
+                    </div>
+                    <div id="list-event" class="content scaffold-list" role="main">
+                        <g:each in="${eventInstanceList}" status="i" var="eventInstance">
+                            <g:link action="show" id="${eventInstance.id}">
+                            <div class="event">
+                                <img src="${resource(dir: 'images', file: 'sharesport_logo.png')}" alt="ShareSport" height="80px"/>
+                                <p>${fieldValue(bean: eventInstance, field: "titre")}</p>
+                                <p>${fieldValue(bean: eventInstance, field: "sport.name")}</p>
+                                <p> <g:formatDate date="${eventInstance.begin_date}" /></p>
+                            </div>
+                            </g:link>
+                        </g:each>
 
-                </g:each>
-                    <table>
-                        <thead>
-                        <tr>
-
-                            <g:sortableColumn property="titre" title="${message(code: 'event.titre.label', default: 'Titre')}" />
-
-                            <th><g:message code="event.auteur.label" default="Auteur" /></th>
-
-                            <g:sortableColumn property="begin_date" title="${message(code: 'event.begin_date.label', default: 'Begindate')}" />
-
-                            <th><g:message code="event.sport.label" default="Sport" /></th>
-
-                        </tr>
-                        </thead>
-                    </table>
-                    <div class="pagination">
-                        <g:paginate total="${eventInstanceCount ?: 0}" />
+                        <div class="pagination">
+                            <g:paginate total="${eventInstanceCount ?: 0}" />
+                        </div>
                     </div>
                 </div>
+                <table>
+                    <thead>
+                    <tr>
+
+                        <g:sortableColumn property="titre" title="${message(code: 'event.titre.label', default: 'Titre')}" />
+
+                        <g:sortableColumn property="begin_date" title="${message(code: 'event.begin_date.label', default: 'Begindate')}" />
+
+                    </tr>
+                    </thead>
+                </table>
+
+
             </div>
             <div class="body-sidebar">
                 <div class="user-data">

@@ -2,9 +2,8 @@ package sharesport
 
 class Message {
 
-    User editor
     String content
-    Date date
+    Date date = new Date()
 
 
     static belongsTo = [editor:User, timeline: Timeline]
