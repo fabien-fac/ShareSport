@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 class MessageController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    MessageService message
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -23,7 +24,7 @@ class MessageController {
     }
 
     @Transactional
-    def save(Message messageInstance) {
+    def save(Message messageInstance, Event event) {
         if (messageInstance == null) {
             notFound()
             return
@@ -34,7 +35,17 @@ class MessageController {
             return
         }
 
-        messageInstance.save flush: true
+        if(event == null){
+            notFound()
+            return
+        }
+
+        if (event.hasErrors()) {
+            respond event.errors, view: 'create'
+            return
+        }
+
+        message.create(messageInstance, event)
 
         request.withFormat {
             form multipartForm {

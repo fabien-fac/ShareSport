@@ -3,12 +3,11 @@ package sharesport
 class Event {
 
     Sport sport
-    Timeline timeline
     Date begin_date
     String titre
     User auteur
 
-    static hasMany = [hashtags:Hashtag]
+    static hasMany = [hashtags:Hashtag, timelines: Timeline]
 
 
     static constraints = {
