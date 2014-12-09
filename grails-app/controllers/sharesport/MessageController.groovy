@@ -9,6 +9,7 @@ import grails.transaction.Transactional
 class MessageController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    MessageService message
 
     @Secured(['ROLE_ADMIN'])
     def index(Integer max) {

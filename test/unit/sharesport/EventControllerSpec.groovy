@@ -3,11 +3,22 @@ package sharesport
 
 
 import grails.test.mixin.*
+import org.springframework.transaction.PlatformTransactionManager
+import org.springframework.transaction.TransactionStatus
 import spock.lang.*
 
 @TestFor(EventController)
-@Mock(Event)
+@Mock([Event, Sport, Timeline, User])
 class EventControllerSpec extends Specification {
+
+    EventService eventTestService = new EventService()
+
+    def setup() {
+        eventTestService.transactionManager = Mock(PlatformTransactionManager) {
+            getTransaction(_) >> Mock(TransactionStatus)
+        }
+        controller.eventService = eventTestService
+    }
 
     def populateValidParams(params) {
         assert params != null
@@ -16,6 +27,7 @@ class EventControllerSpec extends Specification {
         params["begin_date"] = new Date()
         params["titre"] = 'GP F1 Abu Dhabi'
         params["auteur"] = Mock(User)
+        params["hashtags"] = new HashSet()
     }
 
     void "Test the index action returns the correct model"() {
@@ -25,7 +37,7 @@ class EventControllerSpec extends Specification {
 
         then:"The model is correct"
             !model.eventInstanceList
-            model.eventInstanceCount == 0
+            model.eventInstanceCount == null
     }
 
     void "Test the create action returns the correct model"() {
