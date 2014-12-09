@@ -143,3 +143,53 @@ div#footer {}
 #login .inner #loginForm input[type='text'], #login .inner #loginForm input[type='password'] {width: inherit;}
 #login #remember_me_holder {padding-left: 210px !important;}
 #login #submit {margin-left: 100px !important;}
+
+
+/* Tchat */
+
+#tchat-event-container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+#box-messages{
+    height: 400px;
+    overflow-y: auto;
+    background-color: #eeeeee;
+}
+
+.message-left, .message-right {
+    margin-top: 4px;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.message-picture-left {
+float: left;
+}
+
+.message-picture-right {
+    float: right;
+}
+
+.message-text-left, .message-text-right {
+    background-color: white;
+    padding: 5px;
+    font-size: 14px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+    max-width: 80%;
+}
+
+.message-text-left {
+    float: left;
+}
+
+.message-text-right {
+    float: right;
+}
+
+.grey-text {
+    font-size: 12px;
+    line-height: 18px;
+    color: rgba(102, 102, 102, 0.79);
+}
