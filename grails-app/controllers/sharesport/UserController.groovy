@@ -1,6 +1,9 @@
 package sharesport
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.codehaus.groovy.grails.core.io.ResourceLocator
+import org.springframework.core.io.Resource
+import org.springframework.core.io.ResourceLoader
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,8 +12,9 @@ import grails.transaction.Transactional
 class UserController {
 
     UserService userService
+    def springSecurityService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update:["POST","PUT"], delete: "DELETE"]
 
     @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
@@ -120,5 +124,31 @@ class UserController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def getUsername() {
+        User user = springSecurityService.getCurrentUser()
+        def username = user?.getUsername()
+        render(contentType: 'text/json', encoding: "UTF-8") {['userName': username]}
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def getImage() {
+        String userName = params.user
+        def img = User.findByUsername(userName)?.picture
+
+        if(img == null){
+            ResourceLoader resourceLoader = new org.springframework.core.io.DefaultResourceLoader ()
+            final Resource image = resourceLoader.getResource('/web-app/images/sharesport_logo.png')
+            render file: image.inputStream, contentType: 'image/png'
+        }
+        else{
+            response.setContentLength(img.length)
+            response.contentType = 'image/png'
+            response.outputStream << img
+            response.outputStream.flush()
+        }
+
     }
 }

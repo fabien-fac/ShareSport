@@ -38,6 +38,15 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'picture', 'error')} ">
+	<label for="picture">
+		<g:message code="user.picture.label" default="Picture" />
+		
+	</label>
+	<input type="file" id="picture" name="picture" />
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountExpired', 'error')} ">
 	<label for="accountExpired">
 		<g:message code="user.accountExpired.label" default="Account Expired" />

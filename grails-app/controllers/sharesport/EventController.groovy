@@ -8,6 +8,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class EventController {
 
+    def springSecurityService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     EventService eventService
 
@@ -110,5 +112,45 @@ class EventController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    @Transactional
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def getAllMessage(){
+        def idLastMessage = 0;
+
+        if(params.idLast){
+            idLastMessage = params.idLast;
+        }
+
+        if(params.idEvent){
+            Event ev = Event.findById(params.idEvent);
+
+            List li = new ArrayList()
+            for (m in ev.timeline.messages.findAll()) {
+                li.add(m.getJson())
+            }
+
+            render li
+        }
+
+
+    }
+
+    @Transactional
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def sendMessage() {
+        if(params.message && params.idEvent){
+
+            String mess = params.message
+            User auteur = springSecurityService.getCurrentUser()
+            Event event = Event.findById(params.idEvent)
+            Message message = new Message(content: mess, date: new Date(), editor: auteur, timeline: event.timeline)
+            message.save()
+
+            render(contentType: 'text/json', encoding: "UTF-8") {['valid': "ok"]}
+        }
+
+        render(contentType: 'text/json', encoding: "UTF-8") {['valid': "ko"]}
     }
 }

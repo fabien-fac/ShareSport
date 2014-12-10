@@ -5,5 +5,6 @@ modules = {
         resource url:'js/common.js'
         resource url:'js/inscription.js'
         resource url:'js/login.js'
+        resource url:'js/tchat.js'
     }
 }

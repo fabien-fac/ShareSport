@@ -6,8 +6,8 @@ class Event {
     Date begin_date
     String titre
     User auteur
-
-    static hasMany = [hashtags:Hashtag, timelines: Timeline]
+    Timeline timeline
+    static hasMany = [hashtags:Hashtag]
 
 
     static constraints = {
