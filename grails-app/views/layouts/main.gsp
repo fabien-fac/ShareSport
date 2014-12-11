@@ -54,8 +54,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
                                     <label for='remember_me'>Rester connecté</label>
+                                </td>
+                                <td>
+                                    <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
                                 </td>
                             </tr>
                         </table>

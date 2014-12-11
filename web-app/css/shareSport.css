@@ -142,6 +142,8 @@ div#footer {}
 #login #remember_me_holder {padding-left: 210px !important;}
 #login #submit {margin-left: 100px !important;}
 
+input[type=checkbox] {width: inherit; height: inherit;
+    float: right;}
 
 /* Tchat */
 
