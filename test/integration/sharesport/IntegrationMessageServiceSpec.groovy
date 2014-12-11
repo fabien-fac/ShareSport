@@ -22,7 +22,7 @@ class IntegrationMessageServiceSpec extends Specification {
         given: "un evenement"
         User user = new User(username: 'totototo', enabled: true, password: 'adminadmin', email: "toto@toto.fr").save(flush: true)
         Sport cyclisme = new Sport(name: "Cyclisme").save(flush: true)
-        def timelineTourDeFrance = new Timeline(dateCreated: new Date()).save(flush: true)
+        def timelineTourDeFrance = new Timeline().save(flush: true)
         Event event = new Event(sport: cyclisme, timeline: timelineTourDeFrance, begin_date: new Date(), titre: "Tournoi des VI nations", auteur: user)
         event.save(flush: true)
 

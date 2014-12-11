@@ -9,6 +9,8 @@ class Message {
     User editor
     Timeline timeline
 
+    static belongsTo = [timeline:Timeline, editor:User]
+
     static constraints = {
         content blank: false
     }

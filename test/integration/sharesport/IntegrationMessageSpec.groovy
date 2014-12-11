@@ -12,10 +12,13 @@ class IntegrationMessageSpec extends Specification {
 
     User editor
     Message message
+    Timeline timeline
 
     def setup() {
         editor = new User(username: "boby", password: "passpass1", email:"aa@aa.com").save(failOnError: true, flush: true)
-        message = new Message(editor: editor, content: "test").save(failOnError: true, flush: true)
+        timeline = new Timeline().save(failOnError: true, flush: true)
+        message = new Message(editor: editor, content: "test", timeline: timeline).save(failOnError: true, flush: true)
+
         editor.addToMessages(message).save(flush: true)
     }
 

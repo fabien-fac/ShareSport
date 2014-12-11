@@ -13,7 +13,7 @@ class MessageService {
         Timeline timeline = new Timeline()
         timeline.addToMessages(message)
         timeline.save(flush: true)
-        event.addToTimelines(timeline)
+        event.timeline = timeline
         return event.save(flush: true)
     }
 
