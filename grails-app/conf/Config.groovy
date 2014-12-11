@@ -99,6 +99,22 @@ environments {
     }
 }
 
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'sharesport.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'sharesport.UserSecureRole'
+grails.plugin.springsecurity.authority.className = 'sharesport.SecureRole'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+        '/':                              ['permitAll'],
+        '/index':                         ['permitAll'],
+        '/index.gsp':                     ['permitAll'],
+        '/assets/**':                     ['permitAll'],
+        '/**/js/**':                      ['permitAll'],
+        '/**/css/**':                     ['permitAll'],
+        '/**/images/**':                  ['permitAll'],
+        '/**/favicon.ico':                ['permitAll'],
+        '/user/signUp':                   ['permitAll']
+]
+
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
@@ -119,3 +135,4 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+

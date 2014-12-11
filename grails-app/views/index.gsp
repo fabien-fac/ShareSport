@@ -3,7 +3,7 @@
 	<head>
 		<meta name="layout" content="main"/>
 		<title>Sharesport - Paris sportifs</title>
-		<style type="text/css" media="screen">
+		<!--<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
 				border: .2em solid #fff;
@@ -78,22 +78,25 @@
 					margin-top: 0;
 				}
 			}
-		</style>
+		</style>-->
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="page-body" role="main">
+		<div class="page-body" role="main">
             <div class="body-content">
                 <h1>Welcome to ShareSport</h1>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque consectetur quam, eleifend ultricies magna iaculis id. Nullam tristique a mi ut aliquet. Donec tempus vel dolor ut pharetra. Pellentesque mollis neque pretium ligula pulvinar, ut auctor purus iaculis. Vivamus ipsum nulla, suscipit quis fermentum non, congue et mi. Ut auctor dapibus erat, sit amet pulvinar ante condimentum vel. Suspendisse molestie lectus ut arcu sodales sollicitudin. Ut mollis, nisi id vehicula vestibulum, ipsum eros eleifend ipsum, et venenatis nunc velit sit amet sapien. Proin auctor aliquet volutpat.
                 </p>
+                <div id="tagul">
+                    <script src="js/tagul.js"></script>
+                </div>
                 <h2>Titre 2</h2>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque consectetur quam, eleifend ultricies magna iaculis id. Nullam tristique a mi ut aliquet. Donec tempus vel dolor ut pharetra. Pellentesque mollis neque pretium ligula pulvinar, ut auctor purus iaculis. Vivamus ipsum nulla, suscipit quis fermentum non, congue et mi. Ut auctor dapibus erat, sit amet pulvinar ante condimentum vel. Suspendisse molestie lectus ut arcu sodales sollicitudin. Ut mollis, nisi id vehicula vestibulum, ipsum eros eleifend ipsum, et venenatis nunc velit sit amet sapien. Proin auctor aliquet volutpat.
                 </p>
             </div>
             <div class="body-sidebar">
+            <sec:ifNotLoggedIn>
                 <h1>Formulaire d'inscription</h1>
                 <g:form>
                     <table>
@@ -120,6 +123,7 @@
                         </tr>
                     </table>
                 </g:form>
+            </sec:ifNotLoggedIn>
             </div>
 		</div>
 	</body>

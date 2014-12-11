@@ -2,25 +2,50 @@ package sharesport
 
 class User {
 
-    String email
-    String password
-    String login
-    Integer score = 0
-    Boolean isAdmin = false
-    Boolean isActive = true
+	transient springSecurityService
 
-    static constraints = {
-        email email: true
-        email blank: false
-        email unique: true
-        password minSize: 8
-        password maxSize: 50
-        password blank: false
-        password password: true
-        login minSize: 4
-        login maxSize: 20
-        login blank: false
-        login unique: true
+	String username
+	String password
+	boolean enabled = true
+	boolean accountExpired
+	boolean accountLocked
+	boolean passwordExpired
+    byte[] picture
+
+    String email
+    Integer score = 0
+
+	static transients = ['springSecurityService']
+
+    static hasMany = [messages:Message]
+
+	static constraints = {
+		username blank: false, unique: true, minSize: 4, maxSize: 20
+		password blank: false, password: true
         score min: 0
-    }
+        email email: true, unique: true, blank: false
+        picture nullable: true, maxSize: 1024*1024
+	}
+
+	static mapping = {
+		password column: '`password`'
+	}
+
+	Set<SecureRole> getAuthorities() {
+		UserSecureRole.findAllByUser(this).collect { it.secureRole }
+	}
+
+	def beforeInsert() {
+		encodePassword()
+	}
+
+	def beforeUpdate() {
+		if (isDirty('password')) {
+			encodePassword()
+		}
+	}
+
+	protected void encodePassword() {
+		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+	}
 }

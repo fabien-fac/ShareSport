@@ -26,7 +26,7 @@ class UserSpec extends Specification {
         given: "pour un utilisateur valide"
         user.email = aEmail
         user.password = aPassword
-        user.login = aPseudo
+        user.username = aPseudo
 
         when: "sauvegarde de l'utilisateur dans la base de données"
         def res = user.validate()
@@ -34,8 +34,6 @@ class UserSpec extends Specification {
         then: "la validation doit fonctionner"
         res == true
         !user.hasErrors()
-        user.isActive == true
-        user.isAdmin == false
 
         where:
         aEmail               | aPassword                   | aPseudo
@@ -50,7 +48,7 @@ class UserSpec extends Specification {
         given: "pour un utilisateur non valide"
         user.email = aEmail
         user.password = aPassword
-        user.login = aPseudo
+        user.username = aPseudo
         user.score = aScore
 
         when: "sauvegarde de l'utilisateur dans la base de données"
@@ -65,8 +63,6 @@ class UserSpec extends Specification {
         "test"               | "motdepassevalide" | "emailnonvalide" | 0
         ""                   | "motdepassevalide" | "emailvide"      | 1
         null                 | "motdepassevalide" | "emailnull"      | 2
-        "toto@gmail.com"     | "1234"             | "passwordShort"  | 3
-        "toto@gmail.com"     | longString         | "passwordlong"   | 4
         "toto@gmail.com"     | null               | "passwordnull"   | 5
         "toto.titi@yahoo.fr" | "motdepassevalide" | ""               | 6
         "toto.titi@yahoo.fr" | "motdepassevalide" | null             | 7
@@ -80,11 +76,11 @@ class UserSpec extends Specification {
 
         given: "pour 2 utilisateurs ayant le même email"
         user.email = "toto@gmail.com"
-        user.login = "toto"
+        user.username = "toto"
         user.password = "oiuadzojoadzja"
         User user2 = new User()
         user2.email = "toto@gmail.com"
-        user2.login = "titi"
+        user2.username = "titi"
         user2.password = "fijojfezojefz"
         user.save(flush: true)
 
@@ -97,15 +93,15 @@ class UserSpec extends Specification {
         user2.hasErrors()
     }
 
-    void "test contraintes login unique"() {
+    void "test contraintes username unique"() {
 
-        given: "pour 2 utilisateurs ayant le même login"
+        given: "pour 2 utilisateurs ayant le même username"
         user.email = "toto@gmail.com"
-        user.login = "toto"
+        user.username = "toto"
         user.password = "oiuadzojoadzja"
         User user2 = new User()
         user2.email = "titi@gmail.com"
-        user2.login = "toto"
+        user2.username = "toto"
         user2.password = "fijojfezojefz"
         user.save(flush: true)
 

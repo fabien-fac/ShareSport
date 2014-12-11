@@ -9,54 +9,69 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><g:layoutTitle default="Grails"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'sharesport_logo.png    ')}" type="image/x-icon">
+		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'sharesport_logo_transparent.png')}" type="image/x-icon">
 		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
         <link rel="stylesheet" href="${resource(dir: 'css', file: 'shareSport.css')}" type="text/css">
+        <link rel="stylesheet" href="${resource(dir: 'images', file: 'skin/fancybox/jquery.fancybox.css')}" type="text/css">
 
 		<g:layoutHead/>
 		<g:javascript library="application"/>
 		<r:layoutResources />
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner">
-            <ul>
-                <li class="btn-logo">
-                    <a href="/ShareSport/"><img src="${resource(dir: 'images', file: 'sharesport_logo.png')}" alt="ShareSport" height="100px"/></a>
-                </li>
-                <li class="btn-header">
-                    <a href="">Item 1</a>
-                </li>
-                <li class="btn-header">
-                    <a href="">Item 2</a>
-                </li>
-                <li class="btn-header">
-                    <a href="">Item 3</a>
-                </li>
-            </ul>
-            <div class="connect">
-                <g:if test="${session.userId == null}">
-                    <g:form>
-                        <table class=" connect">
+		<div id="header" role="banner">
+            <div class="nav-header">
+                <div class="logo-header">
+                    <a href="/ShareSport/"><img src="${resource(dir: 'images', file: 'sharesport_logo.png')}" alt="ShareSport" height="80px"/></a>
+                </div>
+                <ul>
+                    <li class="btn-header">
+                        <g:link controller="event" action="index">Les événements</g:link>
+                    </li>
+                    <li class="btn-header">
+                        <a href="">Item 2</a>
+                    </li>
+                    <li class="btn-header">
+                        <a href="">Item 3</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="connect" id="form-connect">
+                <sec:ifNotLoggedIn>
+                    <form action='/j_spring_security_check' method='POST' id="form_login">
+                        <table id="connect-form">
                             <tr>
-                                <td><g:textField name="email" id="email-connect" placeholder="Adresse email"/></td>
+                                <td>
+                                    <g:textField name='j_username' id='username' placeholder="Nom d'utilisateur"/>
+                                </td>
+                                <td>
+                                    <g:passwordField name='j_password' id='password' placeholder="Mot de passe"/>
+                                </td>
+                                <td>
+                                    <input type="submit" id="submit" class="button-form" value="Connexion"/>
+                                </td>
                             </tr>
                             <tr>
-                                <td><g:passwordField name="password" id="password-connect" placeholder="Mot de passe"/></td>
-                            </tr>
-                            <tr>
-                                <td><input type="button" class="button-form" id="button-connect" value="Connexion"/></td>
+                                <td>
+                                    <label for='remember_me'>Rester connecté</label>
+                                </td>
+                                <td>
+                                    <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
+                                </td>
                             </tr>
                         </table>
+                    </form>
+                </sec:ifNotLoggedIn>
+                <sec:ifLoggedIn>
+                    <g:form controller="logout">
+                        <ul>
+                            <li>
+                                <g:submitButton name="logout" value="Deconnexion"/>
+                            </li>
+                        </ul>
                     </g:form>
-                </g:if>
-                <g:else>
-                    <g:form controller="user" action="logout">
-                        <g:submitButton name="logout" value="Deconnexion"/>
-                    </g:form>
-                </g:else>
+                </sec:ifLoggedIn>
             </div>
         </div>
 		<g:layoutBody/>

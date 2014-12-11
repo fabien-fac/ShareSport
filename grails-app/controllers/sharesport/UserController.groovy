@@ -1,6 +1,9 @@
 package sharesport
 
-
+import grails.plugin.springsecurity.annotation.Secured
+import org.codehaus.groovy.grails.core.io.ResourceLocator
+import org.springframework.core.io.Resource
+import org.springframework.core.io.ResourceLoader
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,23 +12,28 @@ import grails.transaction.Transactional
 class UserController {
 
     UserService userService
+    def springSecurityService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update:["POST","PUT"], delete: "DELETE"]
 
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userInstanceCount: User.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def show(User userInstance) {
         respond userInstance
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         respond new User(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def save(User userInstance) {
         if (userInstance == null) {
             notFound()
@@ -48,10 +56,12 @@ class UserController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(User userInstance) {
         respond userInstance
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update(User userInstance) {
         if (userInstance == null) {
             notFound()
@@ -63,12 +73,12 @@ class UserController {
             return
         }
 
-        userService.updateUser(userInstance)
+        userService.saveUser(userInstance)
         flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = "Utilisateur \""+userInstance.login+"\" est modifié"
+                flash.message = "Utilisateur \""+userInstance.username+"\" est modifié"
                 redirect userInstance
             }
             '*'{ respond userInstance, [status: OK] }
@@ -76,6 +86,7 @@ class UserController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(User userInstance) {
 
         if (userInstance == null) {
@@ -94,28 +105,15 @@ class UserController {
         }
     }
 
-    def inscription (){
-        render(contentType: 'text/json', encoding: "UTF-8") {userService.inscriptionUser(params)}
-    }
-
-    def login() {
-        Boolean result = userService.login(params)
-        String urlToRedirect = ""
-        if(result){
-            urlToRedirect = "user/index"
+    def signUp (){
+        User user = new User()
+        user.username = params.username
+        user.email = params.email
+        user.password = params.password
+        def result = userService.signUpUser(user)
+        render(contentType: 'text/json', encoding: "UTF-8") {
+            ['succeed': result.succeed, 'emailError' : result.emailError, 'loginError':  result.loginError]
         }
-
-        render(contentType: 'text/json', encoding: "UTF-8") {['succeed': result.toString(), 'url': urlToRedirect] }
-    }
-
-    def logout() {
-        Boolean result = userService.logout()
-        String urlToRedirect = ""
-        if(result)
-        {
-            redirect(uri:'/')
-        }
-
     }
 
     protected void notFound() {
@@ -126,5 +124,31 @@ class UserController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def getUsername() {
+        User user = springSecurityService.getCurrentUser()
+        def username = user?.getUsername()
+        render(contentType: 'text/json', encoding: "UTF-8") {['userName': username]}
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+    def getImage() {
+        String userName = params.user
+        def img = User.findByUsername(userName)?.picture
+
+        if(img == null){
+            ResourceLoader resourceLoader = new org.springframework.core.io.DefaultResourceLoader ()
+            final Resource image = resourceLoader.getResource('/web-app/images/sharesport_logo.png')
+            render file: image.inputStream, contentType: 'image/png'
+        }
+        else{
+            response.setContentLength(img.length)
+            response.contentType = 'image/png'
+            response.outputStream << img
+            response.outputStream.flush()
+        }
+
     }
 }

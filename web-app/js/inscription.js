@@ -34,8 +34,8 @@ $( document ).ready(function() {
 
             var xmlRequest = $.ajax({
                 type: "POST",
-                url: baseUrl+"user/inscription",
-                data: {"email": $( "#email-signin").val(), "login": $( "#login-signin").val(), "password": $( "#password-signin").val()}
+                url: baseUrl+"user/signUp",
+                data: {"email": $( "#email-signin").val(), "username": $( "#login-signin").val(), "password": $( "#password-signin").val()}
             });
 
             xmlRequest.done( function(response){
@@ -43,7 +43,7 @@ $( document ).ready(function() {
             });
 
             xmlRequest.fail( function() {
-                alert("Une erreur serveur est survenue");
+                $.fancybox("<strong>Une erreur serveur est survenue</strong>");
             });
         }
 
@@ -65,7 +65,7 @@ var isPasswordValid = function (password) {
 
 var processingInscriptionResponse = function (responseInscription) {
     if(responseInscription.succeed == "true"){
-        alert("Inscription réussite");
+        $.fancybox("<strong>Inscription réussie</strong>");
         $( "#email-signin").val("");
         $( "#login-signin").val("");
         $( "#password-signin").val("");

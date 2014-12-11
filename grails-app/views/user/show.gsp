@@ -23,11 +23,11 @@
 			</g:if>
 			<ol class="property-list user">
 			
-				<g:if test="${userInstance?.email}">
+				<g:if test="${userInstance?.username}">
 				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="user.email.label" default="Email" /></span>
+					<span id="username-label" class="property-label"><g:message code="user.username.label" default="Username" /></span>
 					
-						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${userInstance}" field="email"/></span>
+						<span class="property-value" aria-labelledby="username-label"><g:fieldValue bean="${userInstance}" field="username"/></span>
 					
 				</li>
 				</g:if>
@@ -41,15 +41,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.login}">
-				<li class="fieldcontain">
-					<span id="login-label" class="property-label"><g:message code="user.login.label" default="Login" /></span>
-					
-						<span class="property-value" aria-labelledby="login-label"><g:fieldValue bean="${userInstance}" field="login"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${userInstance?.score}">
 				<li class="fieldcontain">
 					<span id="score-label" class="property-label"><g:message code="user.score.label" default="Score" /></span>
@@ -59,20 +50,47 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.isActive}">
+				<g:if test="${userInstance?.email}">
 				<li class="fieldcontain">
-					<span id="isActive-label" class="property-label"><g:message code="user.isActive.label" default="Is Active" /></span>
+					<span id="email-label" class="property-label"><g:message code="user.email.label" default="Email" /></span>
 					
-						<span class="property-value" aria-labelledby="isActive-label"><g:formatBoolean boolean="${userInstance?.isActive}" /></span>
+						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${userInstance}" field="email"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.isAdmin}">
+				<g:if test="${userInstance?.accountExpired}">
 				<li class="fieldcontain">
-					<span id="isAdmin-label" class="property-label"><g:message code="user.isAdmin.label" default="Is Admin" /></span>
+					<span id="accountExpired-label" class="property-label"><g:message code="user.accountExpired.label" default="Account Expired" /></span>
 					
-						<span class="property-value" aria-labelledby="isAdmin-label"><g:formatBoolean boolean="${userInstance?.isAdmin}" /></span>
+						<span class="property-value" aria-labelledby="accountExpired-label"><g:formatBoolean boolean="${userInstance?.accountExpired}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.accountLocked}">
+				<li class="fieldcontain">
+					<span id="accountLocked-label" class="property-label"><g:message code="user.accountLocked.label" default="Account Locked" /></span>
+					
+						<span class="property-value" aria-labelledby="accountLocked-label"><g:formatBoolean boolean="${userInstance?.accountLocked}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.enabled}">
+				<li class="fieldcontain">
+					<span id="enabled-label" class="property-label"><g:message code="user.enabled.label" default="Enabled" /></span>
+					
+						<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${userInstance?.enabled}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.passwordExpired}">
+				<li class="fieldcontain">
+					<span id="passwordExpired-label" class="property-label"><g:message code="user.passwordExpired.label" default="Password Expired" /></span>
+					
+						<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${userInstance?.passwordExpired}" /></span>
 					
 				</li>
 				</g:if>

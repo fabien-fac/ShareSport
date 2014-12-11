@@ -12,69 +12,34 @@ import org.springframework.web.context.request.RequestContextHolder
 @Transactional
 class UserService {
 
-    def inscriptionUser(Map params) {
+    SecureRoleService secureRoleService
+
+    def signUpUser(User user) {
+
         String result = ""
         String emailError = ""
         String loginError = ""
-
-        User user = new User()
-        user.login = params.login
-        user.email = params.email
-        user.password = params.password
-
         if(!user.validate()){
-            if(User.findByLogin(params.login)){
+
+            if(User.findByUsername(user.username)){
                 loginError = "Login déjà utilisé"
             }
-            if(User.findByEmail(params.email)){
+            if(User.findByEmail(user.email)){
                 emailError = "Email déjà utilisé"
             }
 
             result = "false"
         }
         else{
-            user.save()
+            User u = user.save()
+            UserSecureRole.create u, secureRoleService.getRoleUser(), true
             result = "true"
         }
 
         ['succeed': result, 'emailError': emailError, 'loginError': loginError]
     }
 
-    def login(Map params) {
-
-        boolean loginSuccess = false
-        String paramsEmail = params.email
-        GrailsWebRequest request = RequestContextHolder.currentRequestAttributes()
-        GrailsHttpSession session = request.session
-
-        User user = User.findByEmail(paramsEmail)
-        if (user != null) {
-            if (user.password == params.password && user.isActive == true) {
-                session["userId"] = user.id;
-                loginSuccess = true
-            }
-        }
-
-        loginSuccess
-    }
-
-    def logout() {
-
-        boolean logoutSuccess = false
-        GrailsWebRequest request = RequestContextHolder.currentRequestAttributes()
-        GrailsHttpSession session = request.session
-
-        long userId = session["userId"]
-
-        if (userId != null) {
-            session.invalidate()
-            logoutSuccess = true
-        }
-        logoutSuccess
-    }
-
-    def updateUser(User user){
-        user.password = user.password.encodeAsMD5()
-        user.save()
+    def saveUser(User user){
+        return user.save(flush: true)
     }
 }
