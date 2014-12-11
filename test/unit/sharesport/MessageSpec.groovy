@@ -1,6 +1,8 @@
 package sharesport
 
+import grails.converters.JSON
 import grails.test.mixin.TestFor
+import grails.web.JSONBuilder
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -51,5 +53,30 @@ class MessageSpec extends Specification {
         anEditor | aContent | aTimeline
         null     | ""       | null
         null     | null     | null
+    }
+
+    void "test de recuperation de json"() {
+        given: "pour un message non valide"
+        def date = new Date()
+        User editor = Mock(User){
+            getUsername() >> "toto"
+            getId() >> 1
+        }
+        JSONBuilder json = new JSONBuilder();
+        def res = json.build {
+            mId = 1
+            mMessage = "content"
+            mDate = date
+            mAuteur = "toto"
+        }
+
+        Timeline timeline = Mock(Timeline)
+        message = new Message(editor: editor, date: date, content:"content", timeline: timeline)
+
+        when: "on recupere le json de l'objet"
+        def res2 = message.getJson()
+
+        then: "on test le resultat"
+        res == res
     }
 }
